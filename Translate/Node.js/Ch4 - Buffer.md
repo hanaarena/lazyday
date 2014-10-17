@@ -49,7 +49,7 @@
 	- [Class: SlowBuffer](#)
 
 
-### Buffer
+## Buffer
 
 原生的javascript对Unicode友好，但是对二进制数据并不友好.当处理TCP流或者文件系统的时候，必须去处理八位数流.Node对多种针对操作，创建和处理八位数流的策略.
 
