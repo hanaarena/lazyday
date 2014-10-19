@@ -1,0 +1,68 @@
+body {
+	background-color: #e1e0e4;
+	font-family: "Microsoft Yahei";
+}
+
+.container {
+	width: 600px;
+	margin: 0 auto;
+	border: 1px solid #222;
+	border-radius: 5px;
+}
+
+.logo,.user-list { padding-left: 13px;}
+
+#content {
+    height: 400px;
+    background-color: #fff;
+    overflow: auto;
+    padding: 2px;
+}
+#content img {
+	max-width: 99%;
+}
+
+.imageLable { position: relative;}
+
+#sendImg {
+    position: absolute;
+    width: 52px;
+    left: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+#emoWrapper {
+	position: relative;
+	display: none;
+	width: 500px;
+	left: 3px;
+	bottom: 176px;
+	background-color: #efefef;
+	box-shadow: 0 1px 1px 2px #ccc;
+}
+#emoWrapper img {
+	width: 25px;
+	height: 25px;
+	margin: 2px;
+	padding: 2px;
+}
+#emoWrapper img:hover {background-color: #ff5432}
+
+#loginWrapper {
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	text-align: center;
+	display: block;
+	padding-top: 200px;
+	background-color: #ccc;
+}
+
+#nicknameWrapper {display: none;}
+
+.errors{
+	border: 1px solid red;
+}

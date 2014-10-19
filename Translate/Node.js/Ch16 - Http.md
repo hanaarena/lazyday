@@ -176,3 +176,44 @@ HTTP响应状态码集合和对应的描述信息.例子：
 <a name="event.clienterror"></a>
 **Event:'clientError'**
 
+`function(exception, socket) { }`
+
+如果一个客户端连接触发`error`事件，将会转发到这里.
+
+`socket`是错误起源的`net.Socket`对象
+
+<a name="server.listenport"></a>
+**server.listen(port[,hostname][,backlog][,callback])**
+
+在特定的端口号和主机名上接收连接.如果主机名被省略，服务器将会直接接收指向IPv4地址的连接(`INADDR_ANY`).
+
+监听一个unix套接字，需要提供用一个文件名来代替端口号和主机名.
+
+`backlog`参数表示等待连接队列的最大值.实际值将由你系统的sysctl设置比如在linux上的`tcp_max_syn_backlog`和`somaxconnn`来决定.默认为511(而不是512).
+
+这个函数支持异步.最后一个参数`callback`将会作为监听者监听['listening'](#)事件.参见[net.Server.listen(port)](#).
+
+<a name="server.listenpath"></a>
+**server.listen(path[,callback])**
+
+在所给的`path`上开启一个UNIX套接字服务器监听所有的连接.
+
+这个函数支持异步.最后一个参数`callback`将会作为监听者监听['listening'](#)事件.参见[net.Server.listen(path)](#)
+
+<a name="server.listenhandle"></a>
+**server.listen(handle[,callback])**
+
+-  `handle` Object
+-  `callback` Function
+
+`handle`对象可以被设置为一个服务器或者套接字(或者任何已下划线开头的`_handle`成员)，又或者一个`{fd: <n>}`对象.
+
+这将导致服务器在特定的handle上接收连接，但是这假设文件描述者(file descriptor)或者handle已经准备好绑定在一个端口号或者域名套接字上.
+
+在Windows上不支持监听文件描述者.
+
+这个函数支持异步.最后一个参数`callback`将会作为监听者监听['listening'](#)事件.参见[net.Server.listen](#)
+
+<a name="server.close"></a>
+**server.close([callback))**
+
