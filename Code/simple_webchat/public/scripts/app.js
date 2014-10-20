@@ -1,5 +1,5 @@
 window.onload = function() {
-	var lazychat = new LazyChat();
+	var lazychat = new LazyChat();	
 	lazychat.init();
 };
 
@@ -7,8 +7,19 @@ var LazyChat = function() {
 	this.socket = null;
 };
 
+/** Random avatar bg color **/
+var	colors = ['Aqua', 'AntiqueWhite', 'Aquamarine', 'DarkSalmon', 'Green', 'LightCoral', 'LightSeaGreen', 'PaleGreen', 'StellBlue', 'Teal'];
+
+/** @ **/
+$(document).on('click', '#chatbox .avatar', function(){
+	var textarea = document.getElementById('messageInput');
+	textarea.value = textarea.value + '@' + $(this).attr('data-user') + ' ';
+	textarea.focus();
+    textarea.selectionStart =textarea.selectionEnd = textarea.value.length;
+});
+
 LazyChat.prototype = {
-	init: function() {
+	init: function() {		
 		var that = this;
 		document.getElementById('nicknameInput').focus();
 		this.socket = io.connect();
@@ -47,8 +58,28 @@ LazyChat.prototype = {
 			if(nickname.trim().length != 0) {
 				that.socket.emit('login', nickname);
 			} else {
+				document.getElementById('nicknameInput').style.backgroundColor = '#fef1f1';
+				document.getElementById('nicknameInput').setAttribute('placeholder', 'Please enter your nickname');
+				document.getElementById('nicknameInput').classList.add('errors');
+				setTimeout('nicknameInput.setAttribute("placeholder","Enter your nickname")',1000);
+				setTimeout('nicknameInput.style.backgroundColor=""',1000);
 				document.getElementById('nicknameInput').focus();
-			}
+			};
+		}, false);
+		document.getElementById('nicknameInput').addEventListener('keyup', function(e){
+			if(e.keyCode == 13) {
+				var nickname = document.getElementById('nicknameInput').value;
+				if(nickname.trim().length != 0) {
+					that.socket.on('login', nickname);
+				} else {
+					document.getElementById('nicknameInput').style.backgroundColor = '#fef1f1';
+					document.getElementById('nicknameInput').setAttribute('placeholder', 'Please enter your nickname');
+					document.getElementById('nicknameInput').classList.add('errors');
+					setTimeout('nicknameInput.setAttribute("placeholder","Enter your nickname")',1000);
+					setTimeout('nicknameInput.style.backgroundColor=""',1000);
+					document.getElementById('nicknameInput').focus();
+				};
+			};
 		}, false);
 		document.getElementById('sendBtn').addEventListener('click', function() {
 			var messageInput = document.getElementById('messageInput'),
@@ -58,7 +89,7 @@ LazyChat.prototype = {
 				messageInput.focus();
 			if(msg.trim().length != 0) {
 				that.socket.emit('postMsg', msg, color);
-				that._displayMsg('me ', msg, color);
+				that._displayMsg('me', msg, color);
 			} else {
 				messageInput.focus();
 			}
@@ -99,34 +130,17 @@ LazyChat.prototype = {
 				messageInput.value = messageInput.value + '[emo:' + target.title + ']';
 			};
 		}, false);
-		document.getElementById('nicknameInput').addEventListener('keyup', function(e){
-			if(e.keyCode == 13) {
-				var nicknameInput = document.getElementById('nicknameInput'),
-					nickname = nicknameInput.value;
-				if(nickname.trim().length != 0) {
-					that.socket.on('login', nickname);
-				} else {
-					nicknameInput.style.backgroundColor = '#fef1f1';
-					nicknameInput.setAttribute('placeholder', 'Please enter your nickname');
-					nicknameInput.classList.add('errors');
-					nicknameInput.focus();
-					setTimeout('nicknameInput.setAttribute("placeholder","Enter your nickname")',1000);
-					setTimeout('nicknameInput.style.backgroundColor=""',1000);
-				}
-			}
-		});
 		document.getElementById('messageInput').addEventListener('keyup', function(e){
 			var messageInput = document.getElementById('messageInput'),
 				msg = messageInput.value,
 				color = document.getElementById('colorSelect').value;		
-			if(e.keyCode == 13 && message.trim().length != 0){
-				msg.value = '';
-				msg.focus();
+			if(e.keyCode == 13 && msg.trim().length != 0){	
+				messageInput.value = '';			
 				that.socket.emit('postMsg', msg, color);
 				that._displayMsg('me', msg, color);
+				messageInput.focus();
 			};
-
-		});
+		}, false);
 	},
 	_initEmo: function() {
 		var emoContainer = document.getElementById('emoWrapper'),
@@ -140,8 +154,8 @@ LazyChat.prototype = {
 		emoContainer.appendChild(docFragment);
 	},
 	_displayMsg: function(user, msg, color) {
-		var container = document.getElementById('content'),
-			msgToDisplay = document.createElement('p'),
+		var container = document.getElementById('chatbox'),
+			msgToDisplay = document.createElement('li'),
 			date = new Date().toTimeString().substr(0, 8),
 			msg = this._displayEmo(msg);
 		/*if(user.trim()==="system") {
@@ -149,12 +163,15 @@ LazyChat.prototype = {
 		 *} else { ... }
 		 */
 		msgToDisplay.style.color = color || '#000';
-		msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + '):</span>' + msg;
+		msgToDisplay.innerHTML = '<div class="avatar" style="background:'+ colors[Math.ceil(Math.random()*10)] +
+		';" data-user="' + user +'"> ' + user.substr(0, 1).toUpperCase() + '</div><em class="boxleft"></em>' + 
+		'<div class="body boxright">'+ '<div class="head">'+ user + date + '</div><div class="msgContent"><p>' + msg +'</p></div></div>';
 		container.appendChild(msgToDisplay);
-		//container.scrollTop = container.scrollHeight;
+		container.scrollTop = container.scrollHeight;
+		//console.log(document.getElementById('chatbox').children.length);
 	},
 	_displayImg: function(user, dataURL) {
-		var container = document.getElementById('content'),
+		var container = document.getElementById('chatbox'),
         imgToDisplay = document.createElement('p'),
         date = new Date().toTimeString().substr(0, 8);
 

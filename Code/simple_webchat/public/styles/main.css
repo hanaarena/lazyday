@@ -12,15 +12,55 @@ body {
 
 .logo,.user-list { padding-left: 13px;}
 
-#content {
+#chatbox {
     height: 400px;
     background-color: #fff;
     overflow: auto;
     padding: 2px;
 }
-#content img {
+#chatbox li {
+	float: left;
+	width: 99%;
+	list-style: none; 
+	padding: 6px 0 17px 5px;
+}
+#chatbox img {
 	max-width: 99%;
 }
+#chatbox .avatar {
+	float:left;
+	height:30px;
+	width:30px;
+	line-height:30px;
+	text-align:center;
+	font-size:14px;
+	background:green;
+	color:#FFF;
+	border-radius:2px 2px 2px 2px;
+	margin: -1px 7px 0 0;
+}
+#chatbox .head { margin-left: 8px}
+#chatbox .body a img { 
+	margin: 0 8px;
+	margin-bottom: 10px;
+}
+#chatbox .boxleft {
+	float:left;
+	width:0;
+	height:0;
+	border-width: 8px 14px 10px 0;
+	border-style: solid solid solid none;
+	border-color: transparent #037E8C transparent transparent;
+}
+#chatbox .boxright {
+	float: left;
+	min-width: 165px;
+	max-width: 410px;
+	background-color: #037E8C;
+}
+#chatbox .msgContent p { word-wrap:break-word; margin-left: 8px}
+
+.timespan { float: right}
 
 .imageLable { position: relative;}
 
