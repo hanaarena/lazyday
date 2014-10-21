@@ -2,7 +2,9 @@ var express = require('express'),
 	app = express(),
 	server = require('http').createServer(app),
 	io = require('socket.io').listen(server),
-	users = [];
+	users = [],
+	colors = ['Aqua', 'AntiqueWhite', 'Aquamarine', 'DarkSalmon', 'Green', 'LightCoral', 'LightSeaGreen', 'PaleGreen', 'StellBlue', 'Teal'];
+
 app.use('/', express.static(__dirname + '/public'));
 
 server.listen(process.env.PORT || 3000);
@@ -25,6 +27,7 @@ io.sockets.on('connection', function(socket) {
 		} else {
 			socket.userIndex = users.length;
 			socket.nickname = nickname;
+			socket.colors = colors[Math.ceil(Math.random()*10)];
 			users.push(nickname);
 			socket.emit('loginSuccess', nickname);
 			socket.broadcast.emit('system', nickname, users.length, 'login');
@@ -35,10 +38,10 @@ io.sockets.on('connection', function(socket) {
 		users.splice(socket.userIndex, 1);
 		socket.broadcast.emit('system', socket.nickname, users.length, 'logout');
 	});
-	socket.on('postMsg', function(msg, color) {
-		socket.broadcast.emit('newMsg', socket.nickname, msg, color);
+	socket.on('postMsg', function(msg) {
+		socket.broadcast.emit('newMsg', socket.nickname, msg, socket.colors);
 	});
 	socket.on('img', function(dataURL) {
-		socket.broadcast.emit('newImg', socket.nickname, dataURL);
+		socket.broadcast.emit('newImg', socket.nickname, dataURL, socket.colors);
 	});
 });
