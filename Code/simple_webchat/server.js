@@ -36,6 +36,7 @@ io.sockets.on('connection', function(socket) {
 	});
 	socket.on('disconnect', function() {
 		users.splice(socket.userIndex, 1);
+		io.sockets.emit('updateUserList', users.length);
 		socket.broadcast.emit('system', socket.nickname, users.length, 'logout');
 	});
 	socket.on('postMsg', function(msg) {
