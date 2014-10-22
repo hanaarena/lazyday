@@ -42,7 +42,7 @@ LazyChat.prototype = {
 			document.getElementById('nicknameInput').focus();
 		});
 		this.socket.on('loginSuccess', function(nickname) {
-			document.title = 'lazychat | ' + document.getElementById('nicknameInput').value;
+			document.title = 'Lazychat | ' + document.getElementById('nicknameInput').value;
 			document.getElementById('loginWrapper').style.display = 'none';
 			document.getElementById('messageInput').focus();
 			that._displayMsg('system ', 'Welcome ' + nickname, 'red');
@@ -51,14 +51,22 @@ LazyChat.prototype = {
 			var msg = nickName + (type == 'login' ? ' joined' : ' left');
 			that._displayMsg('system ', msg, 'red');
 		});
-		this.socket.on('updateUserList',function(userCount) {
-			document.getElementById('user-list').textContent = userCount + (userCount > 1 ? ' users' : ' user')+ ' online';
+		this.socket.on('updateUserList',function(users) {
+			document.getElementById('user-list').textContent = 'Online User: ' + users;
 		});
 		this.socket.on('newMsg', function(user, msg, color) {
 			that._displayMsg(user, msg, color);
 		});
 		this.socket.on('newImg', function(user, dataURL, color) {
 			that._displayImg(user, dataURL, color);
+		});
+		this.socket.on('noti', function(username) {
+			//var regNoti = /Lazychat \| /g;
+			/** get page title value of user nickname **/
+			var nickname = document.title.substr(11);
+			if(username == nickname) {
+				document.querySelector('#container #notification').play();
+			}
 		});
 
 		document.getElementById('loginBtn').addEventListener('click', function() {
@@ -239,10 +247,15 @@ LazyChat.prototype = {
 		 container.scrollTop = container.scrollHeight;
 	},
 	_displayEmo: function(msg) {
-		var match, result = msg,
+		var that = this;
+		var match, at, result = msg,
 			reg =/\[emo:\d+\]/g,
+			reg2 = /@[\u4e00-\u9fa5a-zA-Z0-9_-]{2,30}/g,
 			emoIndex,
 			totalEmoNum = document.getElementById('emoWrapper').children.length;
+		if(at = reg2.exec(msg)) {
+			that.socket.emit('at', at[0]);
+		}
 		while(match = reg.exec(msg)) {
 			emoIndex = match[0].slice(5, -1);
 			if(emoIndex > totalEmoNum) {

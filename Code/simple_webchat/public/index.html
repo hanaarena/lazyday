@@ -6,17 +6,20 @@
 	<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.1/jquery-1.10.1.min.js"></script>
 </head>
 <body>
-	<div class="container">
+	<div id="container">
+		<audio id="notification" src="./content/notification.wav" preload=""></audio>
 		<div class="logo"><h2>Hi webSocket</h2></div>
 		<!-- 在线人数 -->
 		<div id="user-list">X User(s) Online</div>
 		<!-- 信息面板 -->
 		<div id="chatbox"></div>
 		<!-- 聊天工具 -->
-		<div class="controls">
+		<div id="controls">
 			<div class="items">
-				<input id="colorSelect" type="color" placeholder="#000" />
+				<!-- 自定义文字颜色 -->
+				<!-- <input id="colorSelect" type="color" placeholder="#000" /> -->
 				<input id="emo" type="button" value="emoji" />
+				<input id="emonicon" type="button" value="颜文字" />
 				<label for="sendImg" class="imageLable">
 					<input type="button" value="image" />
 					<input id="sendImg" type="file" value="image">
@@ -26,6 +29,7 @@
 			<textarea id="messageInput" placeholder="Enter message.."></textarea>
 			<input id="sendBtn" type="button" value="Send" />
 			<div id="emoWrapper"></div>
+			<div id="niconWrapper"></div>
 		</div>
 	</div>
 	<div id="loginWrapper">

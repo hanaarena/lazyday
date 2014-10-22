@@ -31,16 +31,23 @@ io.sockets.on('connection', function(socket) {
 			users.push(nickname);
 			socket.emit('loginSuccess', nickname);
 			socket.broadcast.emit('system', nickname, users.length, 'login');
-			io.sockets.emit('updateUserList', users.length);
+			io.sockets.emit('updateUserList', users);
 		};
 	});
 	socket.on('disconnect', function() {
 		users.splice(socket.userIndex, 1);
-		io.sockets.emit('updateUserList', users.length);
+		io.sockets.emit('updateUserList', users);
 		socket.broadcast.emit('system', socket.nickname, users.length, 'logout');
 	});
 	socket.on('postMsg', function(msg) {
 		socket.broadcast.emit('newMsg', socket.nickname, msg, socket.colors);
+	});
+	socket.on('at', function(ats) {
+		//console.log(ats);
+		var username = ats.substr(1);
+		if(users.indexOf(username) > -1) {
+			socket.broadcast.emit('noti', username);
+		};	
 	});
 	socket.on('img', function(dataURL) {
 		socket.broadcast.emit('newImg', socket.nickname, dataURL, socket.colors);
