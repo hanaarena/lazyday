@@ -1,6 +1,6 @@
 ## About
 
-A simple webchat reffer to [wayou/hichat](https://github.com/wayou/hichat)
+A simple webchat refer to [wayou/hichat](https://github.com/wayou/hichat)
 
 ## Install
 
