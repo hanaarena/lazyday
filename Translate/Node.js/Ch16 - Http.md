@@ -217,3 +217,43 @@ HTTP响应状态码集合和对应的描述信息.例子：
 <a name="server.close"></a>
 **server.close([callback))**
 
+禁止服务器接收新的连接.详见[net.Server>close()](#)
+
+<a name="server.maxheader"></a>
+**server.maxHeadersCount**
+
+限制最大的请求头部信息数，默认为1000.如果设为0将不受限制.
+
+<a name="server.settimeout"></a>
+**server.setTimeout(msecs, callback)**
+
+-  `msecs` Number
+-  `callback` Function
+
+给套接字(socket)设置超时时间，同时在服务器对象上触发`timeout`事件，如果超时，传递套接字作为参数.
+
+如果这时服务器对象上有一个`timeout`事件监听者，将会把超时套接字作为参数并调用.
+
+默认情况下，服务器的超时时间为2分钟，一旦超时套接字将会自动消除.如果给服务器设置一个`timeout`事件的回调函数，则需要自己去处理超时套接字.
+
+<a name="server.timeout"></a>
+**server.timeout**
+
+-  Number = 120000(2分钟)
+
+一个套接字超时之前的静止毫秒数.
+
+注意当连接成功时超时逻辑已启动，所以改变数字值只会影响服务器往后的新连接，而不是已存在的连接.
+
+设为0时将会禁止所有请求连接的自动超时行为.
+
+
+<a name="http.ServerResponse"></a>
+### Class:http.ServerResponse
+
+这个对象将会在HTTP服务器内部创建.传递第二个参数给`request`事件.
+
+该相应实现了[Writeable Stream](http://nodejs.org/api/stream.html#stream_class_stream_writable)接口，这是一个[EventEmitter](http://nodejs.org/api/events.html#events_class_events_eventemitter)，包括以下事件：
+
+<a name="http.eventclose"></a>
+**Event:'close'**
