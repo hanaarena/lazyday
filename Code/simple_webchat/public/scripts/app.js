@@ -218,18 +218,23 @@ LazyChat.prototype = {
 			date = new Date().toTimeString().substr(0, 8),
 			msg = this._displayEmo(msg);
 
-		/** 文字颜色 **/
+		/** Set the color of msg **/
 		//msgToDisplay.style.color = color || '#000';
-		if(user.trim()==="system") {
+		if(user.trim() === "system") {
 			msgToDisplay.style.color = color;
 			msgToDisplay.innerHTML = '<div class="avatar" style="background: red' +
 			';" data-user="' + user +'"> ' + '！' + '</div><em class="boxleft"></em>' + 
-			'<div class="body boxright">'+ '<div class="head">'+ user + date + '</div><div class="msgContent"><p>' + msg +'</p></div></div>';
+			'<div class="body boxleft2">'+ '<div class="head">'+ user +"  "+ date + '</div><div class="msgContent"><p>' + msg +'</p></div></div>';
+		} else if(user.trim() === "me") {
+			msgToDisplay.innerHTML = '<div class="avatarRight" style="background:'+ color +
+			';" data-user="' + user +'"> ' + user.substr(0, 1).toUpperCase() + '</div><em class="boxright"></em>' + 
+			'<div class="body boxright2">'+ '<div class="head">'+ user +"  "+ date + '</div><div class="msgContent"><p>' + msg +'</p></div></div>';
 		} else {
 			msgToDisplay.innerHTML = '<div class="avatar" style="background:'+ color +
 			';" data-user="' + user +'"> ' + user.substr(0, 1).toUpperCase() + '</div><em class="boxleft"></em>' + 
-			'<div class="body boxright">'+ '<div class="head">'+ user + date + '</div><div class="msgContent"><p>' + msg +'</p></div></div>';
-		}	
+			'<div class="body boxleft2">'+ '<div class="head">'+ user +"  "+ date + '</div><div class="msgContent"><p>' + msg +'</p></div></div>';
+		}
+		/** Append msg to chatbox **/
 		container.appendChild(msgToDisplay);
 		container.scrollTop = container.scrollHeight;
 		//console.log(document.getElementById('chatbox').children.length);
@@ -238,10 +243,10 @@ LazyChat.prototype = {
 		var container = document.getElementById('chatbox'),
         imgToDisplay = document.createElement('li'),
         date = new Date().toTimeString().substr(0, 8);
-
+        /** Append msg to chatbox **/
 		imgToDisplay.innerHTML = '<div class="avatar" style="background:'+ color +
 		';" data-user="' + user +'"> ' + user.substr(0, 1).toUpperCase() + '</div><em class="boxleft"></em>' + 
-		'<div class="body boxright">'+ '<div class="head">'+ user + date + '</div><br />' + '<a href="' + dataURL +
+		'<div class="body boxleft2">'+ '<div class="head">'+ user +"  "+ date + '</div><br />' + '<a href="' + dataURL +
 		 '" target="_blank"><img src="' + dataURL + '" /></a></div>';
 		 container.appendChild(imgToDisplay);
 		 container.scrollTop = container.scrollHeight;
