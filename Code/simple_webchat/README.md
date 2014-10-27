@@ -10,6 +10,6 @@ A simple webchat refer to [wayou/hichat](https://github.com/wayou/hichat)
 ## TODO
 
 -  Add emoticon: [turingou/o3o](https://github.com/turingou/o3o) √
--  @someone with a notification √ 
--  Bootstrap CSS
+-  @someone with notification √ 
+-  Bootstrap CSS √
 -  Response design

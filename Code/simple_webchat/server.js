@@ -3,6 +3,7 @@ var express = require('express'),
 	server = require('http').createServer(app),
 	io = require('socket.io').listen(server),
 	users = [],
+	/** Avatar background color **/
 	colors = ['Aqua', 'AntiqueWhite', 'Aquamarine', 'DarkSalmon', 'Green', 'LightCoral', 'LightSeaGreen', 'PaleGreen', 'StellBlue', 'Teal'];
 
 app.use('/', express.static(__dirname + '/public'));
@@ -20,7 +21,6 @@ io.sockets.on('connection', function(socket) {
 	 *所以代码io.sockets.emit('foo')表示所有人都可以收到该事件。
 	 */
 
-	//User login
 	socket.on('login', function(nickname) {
 		if(users.indexOf(nickname) > -1) {
 			socket.emit('nickExisted');

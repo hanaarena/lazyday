@@ -7,9 +7,6 @@ var LazyChat = function() {
 	this.socket = null;
 };
 
-/** Random avatar bg color **/
-//var colors = ['Aqua', 'AntiqueWhite', 'Aquamarine', 'DarkSalmon', 'Green', 'LightCoral', 'LightSeaGreen', 'PaleGreen', 'StellBlue', 'Teal'];
-
 /** @ **/
 $(document).on('click', '#chatbox .avatar', function() {
 	var textarea = document.getElementById('messageInput');
@@ -52,7 +49,17 @@ LazyChat.prototype = {
 			that._displayMsg('system ', msg, 'red');
 		});
 		this.socket.on('updateUserList',function(users) {
-			document.getElementById('user-list').textContent = 'Online User: ' + users;
+			var isMultiUser = users.length > 1 ? 'users' : 'user',
+				list = document.getElementById('user-list'),
+				listItemsUl = document.createElement('ul');
+			list.innerHTML = 'Online ' + isMultiUser + ': <br/>';
+			for(var n = 0; n < users.length; n++) {		
+				var listItemsLi = document.createElement('li');
+				listItemsLi.innerHTML = users[n];
+				listItemsUl.appendChild(listItemsLi);
+			}
+			list.appendChild(listItemsUl);
+			//document.getElementById('user-list').innerHTML = 'Online ' + isMultiUser +': <br/>' + users+'<br/>';
 		});
 		this.socket.on('newMsg', function(user, msg, color) {
 			that._displayMsg(user, msg, color);
@@ -61,8 +68,7 @@ LazyChat.prototype = {
 			that._displayImg(user, dataURL, color);
 		});
 		this.socket.on('noti', function(username) {
-			//var regNoti = /Lazychat \| /g;
-			/** get page title value of user nickname **/
+			/** Get user nickname of page title value **/
 			var nickname = document.title.substr(11);
 			if(username == nickname) {
 				document.querySelector('#container #notification').play();
@@ -189,28 +195,26 @@ LazyChat.prototype = {
 					docFragment = document.createDocumentFragment();
 
 				var niconItems = document.createElement('div');
-					for(var n = 0; n < data.list.length; n++) {						
-						var niconItemUl1 = document.createElement('ul'),
-							niconItemLi1 = document.createElement('li');
-						niconItemLi1.innerHTML = data.list[n].title;
-						niconItemUl1.appendChild(niconItemLi1);
-						niconItems.appendChild(niconItemUl1);
-						var niconItemUl2 = document.createElement('ul');
-						for(var m = 0; m < data.list[n].yan.length; m++) {							
-							niconItemLi2 = document.createElement('li');
-							niconItemLi2.innerHTML = data.list[n].yan[m];
-							niconItemUl2.appendChild(niconItemLi2);
-						}
-						niconItems.appendChild(niconItemUl2);	
-						docFragment.appendChild(niconItems);
-						//console.log(data.list);
+				for(var n = 0; n < data.list.length; n++) {						
+					var niconItemUl1 = document.createElement('ul'),
+						niconItemLi1 = document.createElement('li');
+					niconItemLi1.innerHTML = data.list[n].title;
+					niconItemUl1.appendChild(niconItemLi1);
+					niconItems.appendChild(niconItemUl1);
+					var niconItemUl2 = document.createElement('ul');
+					for(var m = 0; m < data.list[n].yan.length; m++) {							
+						niconItemLi2 = document.createElement('li');
+						niconItemLi2.innerHTML = data.list[n].yan[m];
+						niconItemUl2.appendChild(niconItemLi2);
 					}
-					niconContainer.appendChild(docFragment);
-
+					niconItems.appendChild(niconItemUl2);	
+					docFragment.appendChild(niconItems);
+					//console.log(data.list);
+				}
+				niconContainer.appendChild(docFragment);
 			},
 			error: function(err) { console.log(err)}
-		});
-		
+		});	
 	},
 	_displayMsg: function(user, msg, color) {
 		var container = document.getElementById('chatbox'),
@@ -243,13 +247,20 @@ LazyChat.prototype = {
 		var container = document.getElementById('chatbox'),
         imgToDisplay = document.createElement('li'),
         date = new Date().toTimeString().substr(0, 8);
-        /** Append msg to chatbox **/
-		imgToDisplay.innerHTML = '<div class="avatar" style="background:'+ color +
-		';" data-user="' + user +'"> ' + user.substr(0, 1).toUpperCase() + '</div><em class="boxleft"></em>' + 
-		'<div class="body boxleft2">'+ '<div class="head">'+ user +"  "+ date + '</div><br />' + '<a href="' + dataURL +
-		 '" target="_blank"><img src="' + dataURL + '" /></a></div>';
-		 container.appendChild(imgToDisplay);
-		 container.scrollTop = container.scrollHeight;
+        /** Append img to chatbox **/
+        if(user.trim() === "me") {
+        	imgToDisplay.innerHTML = '<div class="avatarRight" style="background:'+ color +
+			';" data-user="' + user +'"> ' + user.substr(0, 1).toUpperCase() + '</div><em class="boxright"></em>' + 
+			'<div class="body boxright2">'+ '<div class="head">'+ user +"  "+ date + '</div><br />' + '<a href="' + dataURL +
+		 	'" target="_blank"><img src="' + dataURL + '" /></a></div>';
+        } else {
+			imgToDisplay.innerHTML = '<div class="avatar" style="background:'+ color +
+			';" data-user="' + user +'"> ' + user.substr(0, 1).toUpperCase() + '</div><em class="boxleft"></em>' + 
+			'<div class="body boxleft2">'+ '<div class="head">'+ user +"  "+ date + '</div><br />' + '<a href="' + dataURL +
+		 	'" target="_blank"><img src="' + dataURL + '" /></a></div>';
+		}
+		container.appendChild(imgToDisplay);
+		container.scrollTop = container.scrollHeight;
 	},
 	_displayEmo: function(msg) {
 		var that = this;
@@ -258,9 +269,11 @@ LazyChat.prototype = {
 			reg2 = /@[\u4e00-\u9fa5a-zA-Z0-9_-]{2,30}/g,
 			emoIndex,
 			totalEmoNum = document.getElementById('emoWrapper').children.length;
+		/** Match @ **/
 		if(at = reg2.exec(msg)) {
 			that.socket.emit('at', at[0]);
 		}
+		/** Match emo **/
 		while(match = reg.exec(msg)) {
 			emoIndex = match[0].slice(5, -1);
 			if(emoIndex > totalEmoNum) {

@@ -3,35 +3,46 @@
 	<meta charset='utf-8'>
 	<title>Demo webSocket</title>
 	<link rel="stylesheet" type="text/css" href="styles/main.css">
+	<link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
 	<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.1/jquery-1.10.1.min.js"></script>
 </head>
 <body>
-	<div id="container">
-		<audio id="notification" src="./content/notification.wav" preload=""></audio>
-		<div class="logo"><h2>Hi webSocket</h2></div>
-		<!-- 在线人数 -->
-		<div id="user-list">X User(s) Online</div>
-		<!-- 信息面板 -->
-		<div id="chatbox"></div>
-		<!-- 聊天工具 -->
-		<div id="controls">
-			<div class="items">
-				<!-- 自定义文字颜色 -->
-				<!-- <input id="colorSelect" type="color" placeholder="#000" /> -->
-				<input id="emo" type="button" value="emoji" />
-				<input id="emonicon" type="button" value="颜文字" />
-				<label for="sendImg" class="imageLable">
-					<input type="button" value="image" />
-					<input id="sendImg" type="file" value="image">
-				</label>
-				<input class="clearBtn" type="button" value="reset">
+	<div class="row container" id="container">
+		<div class="col-md-10">
+			<audio id="notification" src="./content/notification.wav" preload=""></audio>
+			<div id="logo"><h2>Hi webSocket</h2></div>
+			<hr>
+			<!-- 信息面板 -->
+			<div id="chatbox"></div>
+			<hr>
+			<!-- 工具 -->
+			<div id="controls">				
+				<div class="items">
+					<!-- 自定义文字颜色 -->
+					<!-- <input id="colorSelect" type="color" placeholder="#000" /> -->
+					<input id="emo" class="btn btn-default" type="button" value="emoji" />
+					<input id="emonicon" class="btn btn-default" type="button" value="颜文字" />				
+					<input type="button" onclick="$('input[id=sendImg]').click();" class="btn btn-default" value="image" />
+					<input id="sendImg" type="file" value="image" style="display:none">
+					<!-- <input class="clearBtn" type="button" value="reset"> -->
+				</div>
+				<!-- Input sandbox -->
+				<div class="sandbox">
+					<textarea id="messageInput" placeholder="Enter message.."></textarea>
+					<input id="sendBtn" class="btn btn-default" type="button" value="Send" />
+				</div>		
+				<!-- 表情 -->
+				<div id="emoWrapper"></div>
+				<!-- 颜文字 -->
+				<div id="niconWrapper"></div>
 			</div>
-			<textarea id="messageInput" placeholder="Enter message.."></textarea>
-			<input id="sendBtn" type="button" value="Send" />
-			<div id="emoWrapper"></div>
-			<div id="niconWrapper"></div>
+		</div>
+		<div class="col-md-2">
+			<!-- 在线人数 -->
+			<div id="user-list">X User(s) Online</div>
 		</div>
 	</div>
+	<!-- login -->
 	<div id="loginWrapper">
 		<p id="info">Connecting...</p>
 		<div id="nicknameWrapper">
