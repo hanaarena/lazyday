@@ -255,5 +255,50 @@ HTTP响应状态码集合和对应的描述信息.例子：
 
 该相应实现了[Writeable Stream](http://nodejs.org/api/stream.html#stream_class_stream_writable)接口，这是一个[EventEmitter](http://nodejs.org/api/events.html#events_class_events_eventemitter)，包括以下事件：
 
-<a name="http.eventclose"></a>
+<a name="http_event_close"></a>
 **Event:'close'**
+
+`function() { }`
+
+在[response.end()](http://nodejs.org/api/http.html#http_response_end_data_encoding)被调用或者清除前终止指定的优先连接.
+
+<a name="http_event_finish"></a>
+**Event:'finish'**
+
+`function() { }`
+
+响应发送时触发.特别的是，这个事件将会在响应头部和正文体的最后一个片段(segment)通过网络传输给操作系统时触发.但这并不意味着客户端已经接收到信息.
+
+这个事件之后响应对象上将不会再有事件被触发.
+
+<a name="http_response_writecontinue"></a>
+**response.writeContinue()**
+
+发送一个HTTP/1.1 100持续信息给客户端，指定的请求正文体将会被发送.参见[checkContinue](http://nodejs.org/api/http.html#http_event_checkcontinue)
+
+<a name="http_response_writehead_statuscode"></a>
+**response.writeHead(statusCode[,reasonPhrase][,headers])**
+
+发送一个相应头给请求.状态是一个3-digit HTTP状态码，比如404.最后一个参数`headers`时相应头.可以传入一个可读的`reasonPhrase`作为第二个参数(可选).
+
+例子：
+
+```javascript
+var body = 'hello world';
+response.writeHead(200, {
+	'Content-Length': body.length,
+	'Content-Type': 'text/plain'
+});
+```
+这个方法只能在当前请求中调用一次，而且必须在[response.end()](http://nodejs.org/api/http.html#http_response_end_data_encoding)之前调用.
+
+如果你在调用这个方法之前调用[response.write()](http://nodejs.org/api/http.html#http_response_write_chunk_encoding)或者[response.end()](http://nodejs.org/api/http.html#http_response_end_data_encoding),将会调用这个函数，而且隐含/不定的头信息将会被计算.
+
+注意：Content-Length的单位是字符(character)而不是字节(byte).上面的例子可以运行事因为`hello world`字符串只包含一个单字节大小的字符.如果body中多高阶编码的字符，`Buffer.byteLength()`将会来决定指定编码方式的字符串的字节数.Node不会去检查Content-Length和已传输body的长度是否相等.
+
+<a name="http_response_settimeout_msecs"></a>
+**response.setTimeout(msecs,callback)**
+
+-  `msecs` Number
+-  `callback` Function
+
