@@ -13,3 +13,4 @@ A simple webchat refer to [wayou/hichat](https://github.com/wayou/hichat)
 -  @someone with notification √ 
 -  Bootstrap CSS √
 -  Response design
+-  User online status(e.g: free,busy etc.)
