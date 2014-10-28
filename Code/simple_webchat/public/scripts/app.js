@@ -2,10 +2,14 @@ window.onload = function() {
 	var lazychat = new LazyChat();	
 	lazychat.init();
 };
-
+window.onresize = function() {
+	var lazychat2 = new LazyChat();
+	lazychat2._updateOnlineList();
+};
 var LazyChat = function() {
 	this.socket = null;
 };
+var Users = null;
 
 /** @ **/
 $(document).on('click', '#chatbox .avatar', function() {
@@ -49,17 +53,9 @@ LazyChat.prototype = {
 			that._displayMsg('system ', msg, 'red');
 		});
 		this.socket.on('updateUserList',function(users) {
-			var isMultiUser = users.length > 1 ? 'users' : 'user',
-				list = document.getElementById('user-list'),
-				listItemsUl = document.createElement('ul');
-			list.innerHTML = 'Online ' + isMultiUser + ': <br/>';
-			for(var n = 0; n < users.length; n++) {		
-				var listItemsLi = document.createElement('li');
-				listItemsLi.innerHTML = users[n];
-				listItemsUl.appendChild(listItemsLi);
-			}
-			list.appendChild(listItemsUl);
-			//document.getElementById('user-list').innerHTML = 'Online ' + isMultiUser +': <br/>' + users+'<br/>';
+			Users = users;
+			that._updateOnlineList();
+			//var isMultiUser = users.length > 1 ? 'users' : 'user';
 		});
 		this.socket.on('newMsg', function(user, msg, color) {
 			that._displayMsg(user, msg, color);
@@ -283,6 +279,27 @@ LazyChat.prototype = {
 			};
 		};
 		return result;
+	},
+	_updateOnlineList: function() {
+		var list = document.getElementById('user-list');
+		list.innerHTML = '';
+		if(document.body.clientWidth >= 992) {				
+			var	listItemsUl = document.createElement('ul');
+			list.innerHTML = '<h4>Online list:</h4>';
+			for(var n = 0; n < Users.length; n++) {		
+				var listItemsLi = document.createElement('li');
+				listItemsLi.innerHTML = '<div class="status">' + '<span>' + Users[n] + '</span></div>';
+				listItemsUl.appendChild(listItemsLi);
+			};
+		list.appendChild(listItemsUl);
+		} else if(document.body.clientWidth < 992) {
+			var list = document.getElementById('user-list'),
+				listContent = '<h4>Online list:</h4>';
+			for (var n = 0; n < Users.length; n++) { 
+				listContent += '<span class="statusInline"></span>' + Users[n] + '&nbsp;&nbsp;&nbsp;';
+			};
+			list.innerHTML = listContent;
+		};
 	}
 };
 

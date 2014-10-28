@@ -7,7 +7,7 @@ ul, li { list-style: none; float: left;}
 #container {
 	margin: 0 auto;
 }
-.col-md-10, .col-md-2 { border: 1px solid #222}
+.col-md-10, .col-md-2 { border: 2px solid #D1D1D6; border-radius: 5px}
 
 #logo { padding-left: 13px;}
 
@@ -154,10 +154,10 @@ ul, li { list-style: none; float: left;}
 #messageInput { width: 260px}
 #sendBtn { margin-top: -36px; margin-left: 4px; height: 44px}
 
-/** online user **/
-#user-list {}
+/** Online list **/
+#user-list ul { margin-left: -38px; margin-bottom: -5px;}
 @media (min-width: 992px) {
-	#user-list li { width: 99%}
+	#user-list li { width: 99%; margin-bottom: 20px;}
 }
 
 /** Login nickname wrapper **/
@@ -173,8 +173,15 @@ ul, li { list-style: none; float: left;}
 	background-color: #ccc;
 }
 
-#nicknameWrapper {display: none;}
+#nicknameWrapper { display: none}
 
-.errors{
-	border: 1px solid red;
+.errors { border: 1px solid red}
+.status {
+	width: 8px; height: 8px; background: green; border-radius: 50px
+}
+.status span {
+ 	position: relative; left: 17px; top: -5px
+}
+.statusInline {
+	width: 8px; height: 8px; background: green; border-radius: 50px; margin-right: 5px; display: inline-block
 }

@@ -4,7 +4,7 @@ var express = require('express'),
 	io = require('socket.io').listen(server),
 	users = [],
 	/** Avatar background color **/
-	colors = ['Aqua', 'AntiqueWhite', 'Aquamarine', 'DarkSalmon', 'Green', 'LightCoral', 'LightSeaGreen', 'PaleGreen', 'StellBlue', 'Teal'];
+	colors = ['Aqua', 'AntiqueWhite', 'Aquamarine', 'DarkSalmon', 'LightBlue', 'LightCoral', 'LightSeaGreen', 'PaleGreen', 'StellBlue', 'Teal'];
 
 app.use('/', express.static(__dirname + '/public'));
 
