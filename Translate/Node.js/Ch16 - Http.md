@@ -302,3 +302,46 @@ response.writeHead(200, {
 -  `msecs` Number
 -  `callback` Function
 
+设定套接字的超时值为`msecs`.如果有回调函数，那它将会做为响应对象上的`timeout`事件的监听者.
+
+如果请求、响应或者服务器上没有`timeout`监听者，一旦超时套接字将会被移除.如果你在请求、响应或者服务器的`timeout`事件上声明一个handler，需要自行处理超时套接字.
+
+<a name="http_response_statuscode"></a>
+**response.statusCode**
+
+当使用隐含的头部时(而不是调用[response.writeHead()](http://nodejs.org/api/http.html#http_response_writehead_statuscode_reasonphrase_headers))，当头部被刷新时，这个属性控制的状态码将会被发送给客户端.
+
+例子：
+
+    response.statusCode = 404;
+
+当响应头部被发送到客户端后，这个属性将会显示已发送的状态码.
+
+<a name="http_response_setheader"></a>
+**response.setHeader(name,value)**
+
+给隐含的头部设置一个单一的头部值.如果这个头部存在于即将发布的头部，它的值将会被代替.如果你需要发送名字相同的多个头部时可以使用一个字符串数组来代替.
+
+例子：
+
+    response.setHeader("Content-Type", "text/html");
+
+或者：
+
+    response.setHeader("Set-Cookie", ["type=ninja", "language=javascript"]);
+
+<a name="http_response_headerssent"></a>
+**response.headersSent**
+
+布尔类型(只读).头部已发送时为`true`，否则为`false`.
+
+<a name="http_response_senddate"></a>
+**response.sendDate**
+
+当它为`true`且当前头部没有Date信息时将会自动产生Date头部，并发送，默认为`true`.
+
+测试时应该禁用它.HTTP响应需要Date头部.
+
+<a name="http_response_getheader"></a>
+**response.getHeader(name)**
+
