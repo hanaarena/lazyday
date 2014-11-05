@@ -108,7 +108,7 @@ LazyChat.prototype = {
 				messageInput.focus();
 			if(msg.trim().length != 0) {
 				that.socket.emit('postMsg', msg);
-				that._displayMsg('me', msg);
+				that._displayMsg('me', msg, 'green');
 			} else {
 				messageInput.focus();
 			}
@@ -221,18 +221,18 @@ LazyChat.prototype = {
 		/** Set the color of msg **/
 		//msgToDisplay.style.color = color || '#000';
 		if(user.trim() === "system") {
-			msgToDisplay.style.color = color;
 			msgToDisplay.innerHTML = '<div class="avatar" style="background: red' +
-			';" data-user="' + user +'"> ' + '！' + '</div><em class="boxleft"></em>' + 
-			'<div class="body boxleft2">'+ '<div class="head">'+ user +"  "+ date + '</div><div class="msgContent"><p>' + msg +'</p></div></div>';
+			';" data-user="' + user +'"> ' + '！' + '</div>' + 
+			'<div class="body boxleft2">'+ '<div class="msgContent"><p>' + msg + '</p></div><div class="time">'+ user +"  "+ date + '</div></div>';
 		} else if(user.trim() === "me") {
-			msgToDisplay.innerHTML = '<div class="avatarRight" style="background:'+ color +
-			';" data-user="' + user +'"> ' + user.substr(0, 1).toUpperCase() + '</div><em class="boxright"></em>' + 
-			'<div class="body boxright2">'+ '<div class="head">'+ user +"  "+ date + '</div><div class="msgContent"><p>' + msg +'</p></div></div>';
+			msgToDisplay.className = 'self';
+			msgToDisplay.innerHTML = '<div class="avatarRight"' +
+			' data-user="' + user +'"> ' + user.substr(0, 1).toUpperCase() + '</div>' + 
+			'<div class="body boxright2">'+ '<div class="msgContent"><p>' + msg + '</p></div><div class="time">'+ user +"  "+ date + '</div></div>';
 		} else {
 			msgToDisplay.innerHTML = '<div class="avatar" style="background:'+ color +
-			';" data-user="' + user +'"> ' + user.substr(0, 1).toUpperCase() + '</div><em class="boxleft"></em>' + 
-			'<div class="body boxleft2">'+ '<div class="head">'+ user +"  "+ date + '</div><div class="msgContent"><p>' + msg +'</p></div></div>';
+			';" data-user="' + user +'"> ' + user.substr(0, 1).toUpperCase() + '</div>' + 
+			'<div class="body boxleft2">'+ '<div class="msgContent"><p>' + msg + '</p></div><div class="time">'+ user +"  "+ date + '</div></div>';
 		}
 		/** Append msg to chatbox **/
 		container.appendChild(msgToDisplay);
@@ -245,15 +245,16 @@ LazyChat.prototype = {
         date = new Date().toTimeString().substr(0, 8);
         /** Append img to chatbox **/
         if(user.trim() === "me") {
-        	imgToDisplay.innerHTML = '<div class="avatarRight" style="background:'+ color +
-			';" data-user="' + user +'"> ' + user.substr(0, 1).toUpperCase() + '</div><em class="boxright"></em>' + 
-			'<div class="body boxright2">'+ '<div class="head">'+ user +"  "+ date + '</div><br />' + '<a href="' + dataURL +
-		 	'" target="_blank"><img src="' + dataURL + '" /></a></div>';
+        	imgToDisplay.className = 'self';
+        	imgToDisplay.innerHTML = '<div class="avatarRight"' +
+			' data-user="' + user +'"> ' + user.substr(0, 1).toUpperCase() + '</div>' + 
+			'<div class="body boxright2">' + '<a href="' + dataURL +
+		 	'" target="_blank"><img src="' + dataURL + '" /></a><br/><div class="time">'+ user +"  "+ date + '</div></div>';
         } else {
 			imgToDisplay.innerHTML = '<div class="avatar" style="background:'+ color +
-			';" data-user="' + user +'"> ' + user.substr(0, 1).toUpperCase() + '</div><em class="boxleft"></em>' + 
-			'<div class="body boxleft2">'+ '<div class="head">'+ user +"  "+ date + '</div><br />' + '<a href="' + dataURL +
-		 	'" target="_blank"><img src="' + dataURL + '" /></a></div>';
+			';" data-user="' + user +'"> ' + user.substr(0, 1).toUpperCase() + '</div>' + 
+			'<div class="body boxleft2">' + '<a href="' + dataURL +
+		 	'" target="_blank"><img src="' + dataURL + '" /></a><br/><div class="time">'+ user +"  "+ date + '</div></div>';
 		}
 		container.appendChild(imgToDisplay);
 		container.scrollTop = container.scrollHeight;
