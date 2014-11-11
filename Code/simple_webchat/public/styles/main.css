@@ -1,20 +1,25 @@
 body {
 	background-color: #e1e0e4;
 	font-family: "Microsoft Yahei";
+	height: 100%;
+	margin: 0;
+	padding: 0;
 }
 ul, li { list-style: none; float: left;}
 
 #container {
-	margin: 0 auto;
+	/*margin: 0 auto;*/
 }
-.col-md-10, .col-md-2 { border: 2px solid #D1D1D6; border-radius: 5px}
+.col-md-10 { border-right: 2px solid #D1D1D6; }
 
-#logo { padding-left: 13px;}
+#logo { padding-left: 13px; border-bottom: 1px solid #D1D1D6;}
+
+.chat { height: 100%;}
 
 /** chatbox **/
 #chatbox {
-    height: 400px;
-    background-color: #F9F9F9;
+    height: 100%;
+    background-color: #F1F1F1;
     overflow: auto;
     padding: 2px;
 }
@@ -122,7 +127,7 @@ ul, li { list-style: none; float: left;}
 
 #chatbox .boxright2 .msgContent p { color: #222}
 
-#chatbox .msgContent p { word-wrap:break-word; margin: 4px 8px 0 8px;}
+#chatbox .msgContent p { word-wrap:break-word; margin: 4px 8px 0 8px; color: red;}
 
 .imageLable { position: relative;}
 
@@ -156,11 +161,11 @@ ul, li { list-style: none; float: left;}
 #emoWrapper img:hover {background-color: #ff5432}
 
 #niconWrapper {
-	position: relative;
+	position: absolute;
 	display: none;
 	width: 500px;
 	height: 242px;
-	bottom: 333px;
+	bottom: 99px;
 	left: 3px;
 	overflow: scroll;
 	background-color: #efefef;
@@ -168,7 +173,7 @@ ul, li { list-style: none; float: left;}
 }
 
 #niconWrapper ul {
-	width: 99%;
+	width: 100%;
 	background-color: #fff;
 }
 
@@ -179,13 +184,16 @@ ul, li { list-style: none; float: left;}
 
 /** controls **/
 #controls {
+	position: absolute;
 	width: 99%;
+	bottom: 0;
+	margin-left: 8px;
 }
 
-.items { margin-top: -7px}
-.sandbox { margin-top: 7px}
-#messageInput { width: 260px}
-#sendBtn { margin-top: -36px; margin-left: 4px; height: 44px}
+.items { margin-top: -7px;}
+.sandbox { margin-top: 2px; width: 100%; background-color: #fff;}
+#messageInput { width: 90%;}
+#sendBtn { margin-top: -36px; margin-left: 4px; width: 8%;height: 44px;}
 
 /** Online list **/
 #user-list ul { margin-left: -38px; margin-bottom: -5px;}
