@@ -1,43 +1,65 @@
 <html>
 <head>
 	<meta charset='utf-8'>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 	<title>Demo webSocket</title>
 	<link rel="stylesheet" type="text/css" href="styles/main.css">
 	<link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
-	<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.1/jquery-1.10.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles/component.css">
 </head>
 <body>
-	<div class="container" id="container">
-		<div id="logo"><h2>Hi webSocket</h2></div>
-		<div class="chat col-md-10">
-			<audio id="notification" src="./content/notification.wav" preload=""></audio>			
-			<!-- 信息面板 -->
-			<div id="chatbox"></div>
-			<!-- 工具 -->
-			<div id="controls">				
-				<div class="items">
-					<!-- 自定义文字颜色 -->
-					<!-- <input id="colorSelect" type="color" placeholder="#000" /> -->
-					<input id="emo" class="btn btn-default" type="button" value="emoji" />
-					<input id="emonicon" class="btn btn-default" type="button" value="颜文字" />				
-					<input type="button" onclick="$('input[id=sendImg]').click();" class="btn btn-default" value="image" />
-					<input id="sendImg" type="file" value="image" style="display:none">
-					<!-- <input class="clearBtn" type="button" value="reset"> -->
-				</div>
-				<!-- Input sandbox -->
-				<div class="sandbox">
-					<textarea id="messageInput" placeholder="Enter message.."></textarea>
-					<input id="sendBtn" class="btn btn-default" type="button" value="Send" />
-				</div>		
-				<!-- 表情 -->
-				<div id="emoWrapper"></div>
-				<!-- 颜文字 -->
-				<div id="niconWrapper"></div>
-			</div>
+	<div class="st-container container" id="container">
+		<div class="st-menu st-effect" id="menu-2">
+				<h2 class="icon icon-stack">Avatar</h2>
+				<ul>
+					<li><a class="icon" href="#">Chat Room</a></li>
+					<li><a class="icon" href="#">My Room</a></li>
+				</ul>
 		</div>
-		<div class="online-list col-md-2">
-			<!-- 在线人数 -->
-			<div id="user-list">X User(s) Online</div>
+		<div class="st-pusher">
+			<div class="st-content">
+				<div id="logo">
+					<div id="st-trigger-effects" class="column">
+						<nav data-effect="st-effect" id="menu" class="menu-close">
+							<figure class="menu-line-1"></figure>
+							<figure class="menu-line-2"></figure>
+							<figure class="menu-line-3"></figure>
+						</nav>		
+					</div>
+					<h2>Hi webSocket</h2>
+				</div>
+				<div class="chat col-md-10">
+					<audio id="notification" src="./content/notification.wav" preload=""></audio>			
+					<!-- 信息面板 -->
+					<div id="chatbox"></div>
+					<!-- 工具 -->
+					<div id="controls">				
+						<div class="items">
+							<!-- 自定义文字颜色 -->
+							<!-- <input id="colorSelect" type="color" placeholder="#000" /> -->
+							<input id="emo" class="btn btn-default" type="button" value="emoji" />
+							<input id="emonicon" class="btn btn-default" type="button" value="颜文字" />				
+							<input type="button" onclick="$('input[id=sendImg]').click();" class="btn btn-default" value="image" />
+							<input id="sendImg" type="file" value="image" style="display:none">
+							<!-- <input class="clearBtn" type="button" value="reset"> -->
+						</div>
+						<!-- Input sandbox -->
+						<div class="sandbox">
+							<textarea id="messageInput" placeholder="Enter message.."></textarea>
+							<input id="sendBtn" class="btn btn-default" type="button" value="Send" />
+						</div>		
+						<!-- 表情 -->
+						<div id="emoWrapper"></div>
+						<!-- 颜文字 -->
+						<div id="niconWrapper"></div>
+					</div>
+				</div>
+				<div class="online-list col-md-2">
+					<!-- 在线人数 -->
+					<div id="user-list">X User(s) Online</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!-- login -->
@@ -49,7 +71,10 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.1/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="scripts/app.js"></script>	
 	<script type="text/javascript" src="scripts/main.js"></script>
+	<script type="text/javascript" src="scripts/plugin/classie.js"></script>
+	<script type="text/javascript" src="scripts/plugin/sidebarEffects.js"></script>
 </body>
 </html>

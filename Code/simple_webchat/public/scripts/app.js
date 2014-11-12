@@ -9,7 +9,7 @@ window.onresize = function() {
 var LazyChat = function() {
 	this.socket = null;
 };
-var Users = null;
+var Users = '';
 
 /** @ **/
 $(document).on('click', '#chatbox .avatar', function() {

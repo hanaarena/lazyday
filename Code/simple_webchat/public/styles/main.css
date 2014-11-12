@@ -9,6 +9,7 @@ ul, li { list-style: none; float: left;}
 
 #container {
 	/*margin: 0 auto;*/
+	overflow: hidden;
 }
 .col-md-10 { border-right: 2px solid #D1D1D6; }
 
@@ -234,4 +235,80 @@ ul, li { list-style: none; float: left;}
 
 .statusInline {
 	width: 8px; height: 8px; background: green; border-radius: 50px; margin-right: 5px; display: inline-block
+}
+/* side bar menu style */
+
+		#menu {
+		display: block;
+		position: absolute;
+		top: 0; right: 15px;
+		width: 60px;
+		height: 60px;
+		cursor: pointer;
+		-webkit-transition: all .25s ease-in-out 0s;
+		-moz-transition: all .25s ease-in-out 0s;
+		-ms-transition: all .25s ease-in-out 0s;
+		 -o-transition: all .25s ease-in-out 0s;
+			transition: all .25s ease-in-out 0s;
+		}
+		.menu-line-1 {
+	display: block;
+	position: absolute;
+	top: 18px; left: 50%;
+	margin-left: -24px;
+	width: 48px;
+	height: 2px;
+	background: #C7C7C7;
+	border-radius: 1px;
+	-webkit-transform-origin: right top 0;
+	   -moz-transform-origin: right top 0;
+	    -ms-transform-origin: right top 0;
+	     -o-transform-origin: right top 0;
+	        transform-origin: right top 0;
+	-webkit-transition: all .25s ease-in-out 0s;
+	   -moz-transition: all .25s ease-in-out 0s;
+	    -ms-transition: all .25s ease-in-out 0s;
+	     -o-transition: all .25s ease-in-out 0s;
+	        transition: all .25s ease-in-out 0s;
+}
+.menu-line-2 {
+	display: block;
+	position: absolute;
+	top: 50%; left: 50%;
+	margin-top: -1px;
+	margin-left: -24px;
+	width: 48px;
+	height: 2px;
+	background: #C7C7C7;
+	border-radius: 1px;
+	-webkit-transform-origin: center top 0;
+	   -moz-transform-origin: center top 0;
+	    -ms-transform-origin: center top 0;
+	     -o-transform-origin: center top 0;
+	        transform-origin: center top 0;
+	-webkit-transition: all .25s ease-in-out 0s;
+	   -moz-transition: all .25s ease-in-out 0s;
+	    -ms-transition: all .25s ease-in-out 0s;
+	     -o-transition: all .25s ease-in-out 0s;
+	        transition: all .25s ease-in-out 0s;
+}
+.menu-line-3 {
+	display: block;
+	position: absolute;
+	bottom: 18px; left: 50%;
+	margin-left: -24px;
+	width: 48px;
+	height: 2px;
+	background: #C7C7C7;
+	border-radius: 1px;
+	-webkit-transform-origin: right top 0;
+	   -moz-transform-origin: right top 0;
+	    -ms-transform-origin: right top 0;
+	     -o-transform-origin: right top 0;
+	        transform-origin: right top 0;
+	-webkit-transition: all .25s ease-in-out 0s;
+	   -moz-transition: all .25s ease-in-out 0s;
+	    -ms-transition: all .25s ease-in-out 0s;
+	     -o-transition: all .25s ease-in-out 0s;
+	        transition: all .25s ease-in-out 0s;
 }

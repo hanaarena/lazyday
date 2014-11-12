@@ -12,3 +12,6 @@ $(window).ready(function() {
 		$('.chat').css('height', window.innerHeight-65);
 	}
 });
+$('#menu').bind('click', function() {
+	$('.st-menu').css('position', 'absolute');
+});
