@@ -15,3 +15,6 @@ $(window).ready(function() {
 $('#menu').bind('click', function() {
 	$('.st-menu').css('position', 'absolute');
 });
+$('.logout').bind('click', function() {
+	window.location = window.location.href;
+});

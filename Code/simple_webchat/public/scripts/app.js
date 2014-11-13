@@ -48,15 +48,11 @@ LazyChat.prototype = {
 			document.getElementById('messageInput').focus();
 			that._displayMsg('system ', 'Welcome ' + nickname, 'red');
 
-			/*var before = document.getElementById('menu-2').getElementsByTagName('ul')[1];
-			var insert = document.createElement('ul');
-			insert.innerHTML = '<div class="st-avatar">' + nickname.substr(0, 1).toUpperCase() +'</div>';
-			var pNode = before.parentNode;
-			pNode.insertBefore(insert, before);*/
+			/* Add user avatar in slide bar */
 			var par = document.getElementById('menu-2');
 			var parChild = par.firstChild;
 			var insert = document.createElement('ul');
-			insert.innerHTML = '<div class="st-avatar">' + nickname.substr(0, 1).toUpperCase() +'</div>';
+			insert.innerHTML = '<div class="st-avatar" title="' + nickname +'">' + nickname.substr(0, 1).toUpperCase() +'</div>';
 			par.insertBefore(insert, parChild);
 		});
 		this.socket.on('system', function(nickName, userCount, type) {
