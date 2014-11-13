@@ -47,6 +47,17 @@ LazyChat.prototype = {
 			document.getElementById('loginWrapper').style.display = 'none';
 			document.getElementById('messageInput').focus();
 			that._displayMsg('system ', 'Welcome ' + nickname, 'red');
+
+			/*var before = document.getElementById('menu-2').getElementsByTagName('ul')[1];
+			var insert = document.createElement('ul');
+			insert.innerHTML = '<div class="st-avatar">' + nickname.substr(0, 1).toUpperCase() +'</div>';
+			var pNode = before.parentNode;
+			pNode.insertBefore(insert, before);*/
+			var par = document.getElementById('menu-2');
+			var parChild = par.firstChild;
+			var insert = document.createElement('ul');
+			insert.innerHTML = '<div class="st-avatar">' + nickname.substr(0, 1).toUpperCase() +'</div>';
+			par.insertBefore(insert, parChild);
 		});
 		this.socket.on('system', function(nickName, userCount, type) {
 			var msg = nickName + (type == 'login' ? ' joined' : ' left');
@@ -130,6 +141,7 @@ LazyChat.prototype = {
 				reader.readAsDataURL(file);
 			}		
 		}, false);
+		/* Init Tuski emonicon */
 		this._initEmo();
 		document.getElementById('emo').addEventListener('click', function(e) {
 			document.getElementById('emoWrapper').style.display = 'block';
@@ -153,6 +165,7 @@ LazyChat.prototype = {
 				messageInput.value = messageInput.value + '[emo:' + target.title + ']';
 			};
 		}, false);
+		/* Init yan emonicon */
 		this._initEmonicon();
 		document.getElementById('emonicon').addEventListener('click', function(e){
 			document.getElementById('niconWrapper').style.display = 'block';
@@ -270,7 +283,7 @@ LazyChat.prototype = {
 		if(at = reg2.exec(msg)) {
 			that.socket.emit('at', at[0]);
 		}
-		/** Match emo **/
+		/** Match Tuski emo **/
 		while(match = reg.exec(msg)) {
 			emoIndex = match[0].slice(5, -1);
 			if(emoIndex > totalEmoNum) {

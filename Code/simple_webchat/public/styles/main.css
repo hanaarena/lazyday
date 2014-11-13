@@ -15,6 +15,8 @@ ul, li { list-style: none; float: left;}
 
 #logo { padding-left: 13px; border-bottom: 1px solid #D1D1D6;}
 
+#logo h2 { position: relative; margin-left: 66px;}
+
 .chat { height: 100%;}
 
 /** chatbox **/
@@ -66,7 +68,7 @@ ul, li { list-style: none; float: left;}
   	border-bottom-color: transparent;
 }
 
-#chatbox .avatarRight {
+#chatbox .avatarRight, .st-avatar {
 	position: relative;	
 	order: 2;
 	height:40px;
@@ -237,21 +239,20 @@ ul, li { list-style: none; float: left;}
 	width: 8px; height: 8px; background: green; border-radius: 50px; margin-right: 5px; display: inline-block
 }
 /* side bar menu style */
-
-		#menu {
-		display: block;
-		position: absolute;
-		top: 0; right: 15px;
-		width: 60px;
-		height: 60px;
-		cursor: pointer;
-		-webkit-transition: all .25s ease-in-out 0s;
-		-moz-transition: all .25s ease-in-out 0s;
-		-ms-transition: all .25s ease-in-out 0s;
-		 -o-transition: all .25s ease-in-out 0s;
-			transition: all .25s ease-in-out 0s;
-		}
-		.menu-line-1 {
+#menu {
+	display: block;
+	position: absolute;
+	top: 0;
+	width: 60px;
+	height: 60px;
+	cursor: pointer;
+	-webkit-transition: all .25s ease-in-out 0s;
+	   -moz-transition: all .25s ease-in-out 0s;
+	    -ms-transition: all .25s ease-in-out 0s;
+	     -o-transition: all .25s ease-in-out 0s;
+	        transition: all .25s ease-in-out 0s;
+}
+.menu-line-1 {
 	display: block;
 	position: absolute;
 	top: 18px; left: 50%;
