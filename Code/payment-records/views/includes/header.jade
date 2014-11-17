@@ -1,1 +1,54 @@
-header.jade
+.container
+	.row
+		.page-header.clearfix
+			h1= title
+			.col-md-4
+				small Payment Records
+			.col-md-8
+				form(method='GET', action='/results')
+					.input-group.col-sm-4.pull-right
+						input.form-control(type='text', name='q')
+						span.input-group-btn
+							button.btn.btn-default(type='submit') Search
+.navbar.navbar-default.navbar-fixed-bottom
+	.container
+		.navbar-header
+			a.navbar-brand(href='/') History
+		p.navbar-text.navbar-right
+			span User: #{user.name}
+			span &nbsp;|&nbsp;
+			a.navbar-link(href='/logout') Logout
+			span &nbsp;|&nbsp;
+			a.navbar-link(href='#', data-toggle='modal', data-target='#signinModal') Login
+#signupModal.modal.fade
+	.modal-dialog
+		.modal-content
+			form(method='POST', action='/user/signup')
+				.modal-header Sign up
+				.modal-body
+					.form-group
+						label(for='signupName') User
+						input#signupName.form-control(name='user[name]', type='text')
+					.form-group
+						label(for='signupPassword') Password
+						input#signupPassword.form-control(name='user[password]', type='text'
+						)
+				.modal-footer
+					button.btn.btn-default(type='button', data-dismiss='modal') Close
+					button.btn.btn-success(type='submit') Submit
+#signinModal.modal.fade
+	.modal-dialog
+		.modal-content
+			form(method='POST', action='/user/signin')
+				.modal-header Sign in
+				.modal-body
+					.form-group
+						label(for='signinName') User
+						input#signinName.form-control(name='user[name]', type='text'
+						)
+					.form-group
+						label(for='signinPassword') Password
+						input#signinPassword.form-control(name='user[password]', type='text')
+				.modal-footer
+					button.btn.btn-default(type='button', data-dismiss='modal') Close
+					button.btn.btn-success(type='submit') Submit
