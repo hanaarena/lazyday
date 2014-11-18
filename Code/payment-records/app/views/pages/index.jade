@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+  .container
+    .row
+      .main
+        form.form-horizontal(method="post", action="/admin/new")
+          .form-group
+            .col-sm-2
+              input#inputNewpay.form-control(type="text", name="newpay", autocomplete="false")
+            button.btn.btn-default(type="submit") 录入
+      .pay-list

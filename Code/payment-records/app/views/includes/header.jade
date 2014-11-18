@@ -1,21 +1,9 @@
-.container
-	.row
-		.page-header.clearfix
-			h1= title
-			.col-md-4
-				small Payment Records
-			.col-md-8
-				form(method='GET', action='/results')
-					.input-group.col-sm-4.pull-right
-						input.form-control(type='text', name='q')
-						span.input-group-btn
-							button.btn.btn-default(type='submit') Search
-.navbar.navbar-default.navbar-fixed-bottom
+.navbar.navbar-default.navbar-fixed-top
 	.container
 		.navbar-header
-			a.navbar-brand(href='/') History
+			a.navbar-brand(href='/') Payment Records
 		p.navbar-text.navbar-right
-			span User: #{user.name}
+			span User: User
 			span &nbsp;|&nbsp;
 			a.navbar-link(href='/logout') Logout
 			span &nbsp;|&nbsp;
@@ -23,7 +11,7 @@
 #signupModal.modal.fade
 	.modal-dialog
 		.modal-content
-			form(method='POST', action='/user/signup')
+			form(method='POST', action='/u/signup')
 				.modal-header Sign up
 				.modal-body
 					.form-group
@@ -39,7 +27,7 @@
 #signinModal.modal.fade
 	.modal-dialog
 		.modal-content
-			form(method='POST', action='/user/signin')
+			form(method='POST', action='/u/signin')
 				.modal-header Sign in
 				.modal-body
 					.form-group
