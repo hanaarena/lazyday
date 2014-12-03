@@ -15,6 +15,10 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.1"
+    "bootstrap": "~3.3.1",
+    "backbone": "*",
+    "backbone.marionette": "1.1.0",
+    "jquery": "*",
+    "underscore": "*"
   }
 }

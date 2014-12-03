@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  .container
+    .row
+      .main
+        h1 Payment Records
+        .controls
+          .col-sm-3
+            input#field.form-control(type="text" placeholder="Price" class="col-sm-2")
+          div.btn-group
+            button.btn.btn-default.dropdown-toggle.type-name(type="button" data-toggle="dropdown") Type 
+              span(class="caret") 
+            ul.dropdown-menu(role="menu")
+              li: a.shop(href="#") Shopping
+              li: a(href="#") Eat
+              li: a(href="#") Traffic
+          input#send(type='button', class="btn btn-primary", value='Send')
+      .pay-list
+        ul#content.list-group
+  script(type="text/template", id="message-item")
+            <%= price + ',' + types %>

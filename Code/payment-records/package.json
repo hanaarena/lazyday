@@ -1,15 +1,38 @@
 {
-  "name": "payment-records",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node app.js"
+  "name": "rabbitrabbitrabbit",
+  "version": "1.0.0",
+  "description": "Real time web-based forum",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:matthewbdaly/rabbitrabbitrabbit.git"
   },
   "dependencies": {
-    "connect-mongo": "^0.3.3",
-    "express": "^3.4.6",
-    "jade": "*",
-    "mongoose": "^3.8.19",
-    "underscore": "^1.7.0"
-  }
+    "socket.io": "latest",
+    "socket.io-client": "latest",
+    "express": "latest",
+    "jade": "latest",
+    "mongoose": "latest"
+  },
+  "devDependencies": {
+    "chai": "latest",
+    "grunt": "~0.4.4",
+    "grunt-coveralls": "^1.0.0",
+    "grunt-jslint": "~1.1.8",
+    "grunt-mocha-istanbul": "2.2.0",
+    "istanbul": "^0.3.0",
+    "mocha": "latest",
+    "request": "latest",
+    "sinon": "1.12.1",
+    "sinon-mocha": "0.0.3"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "author": "Matthew Daly",
+  "license": "GPLv2"
 }
