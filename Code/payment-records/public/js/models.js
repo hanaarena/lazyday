@@ -7,7 +7,8 @@ Payment = Backbone.Model.extend({
     // Default values
     defaults: {
         price: '',
-        types: ''
+        types: '',
+        created: ''
     },
 
     // Prevent submit

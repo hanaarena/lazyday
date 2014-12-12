@@ -34,7 +34,8 @@ App = Backbone.Router.extend({
             socket.emit('send', 
                 { 
                     message: price,
-                    types: typess
+                    types: typess,
+                    created: Date.now()
                 }
             );
             field.val('');
@@ -54,7 +55,7 @@ App = Backbone.Router.extend({
                     if (data.error) {
                         alert('Your message must be at least one character long and not contain whitespace only');
                     } else {
-                        payment_list.create({price: data.message, type: data.type});
+                        payment_list.create({price: data.message, types: data.types, created: data.created});
                         payment_listview.render();
                     }
                 });

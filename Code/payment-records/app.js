@@ -18,6 +18,10 @@ var PaymentSchema = mongoose.Schema({
     types: {
         type: String,
         match: /^(\w+)/
+    },
+    created: {
+        type: Date,
+        match: /^(\w+)/
     }
 });
 var Payment = mongoose.model('Payment', PaymentSchema);
@@ -55,7 +59,7 @@ io.sockets.on('connection', function (socket) {
         var newPayment;
 
         // Store it in the database
-        newPayment = new Payment({ price: data.message, types: data.types });
+        newPayment = new Payment({ price: data.message, types: data.types, created: data.created });
         newPayment.save(function (err) {
             if (err) {
                 // Emit the error
