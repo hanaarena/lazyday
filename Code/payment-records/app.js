@@ -45,6 +45,26 @@ app.get("/payments", function (req, res) {
             res.json(payments);
         }
     });
+
+    //Get total price:
+    //db.payments.aggregate({$match:{}},{$group:{"_id":"$_id",total:{$max:"$price"}}})
+    Payment.aggregate([
+        {$match:{}},
+        {$group:{"_id":"$_id",total:{$max:"$price"}}}
+    ]).exec(function(err, total) {       
+        if(err) {
+            console.log(err)
+        };
+        //if have records
+        if(total) {
+            var num = 0;
+            for(var i = 0; i < total.length; i++) {
+                num += parseInt(total[i].total);
+            }
+            //num = parseInt(total[0].total) + parseInt(total[1].total);
+            console.log(num);
+        }       
+    });  
 });
 
 app.use(express.static(__dirname + '/public'));
@@ -59,12 +79,12 @@ io.sockets.on('connection', function (socket) {
         var newPayment;
 
         // Store it in the database
-        newPayment = new Payment({ price: data.message, types: data.types, created: data.created });
+        newPayment = new Payment({ price: data.payments, types: data.types, created: data.created });
         newPayment.save(function (err) {
             if (err) {
                 // Emit the error
                 data.error = 'Error: ' + err;
-                data.message = null;
+                data.payments = null;
                 io.sockets.emit('error', data);
             } else {
                 io.sockets.emit('payment', data);

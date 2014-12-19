@@ -33,7 +33,7 @@ App = Backbone.Router.extend({
 
             socket.emit('send', 
                 { 
-                    message: price,
+                    payments: price,
                     types: typess,
                     created: Date.now()
                 }
@@ -43,19 +43,19 @@ App = Backbone.Router.extend({
             window.location.reload();
         });
 
-        // Populate the message list
+        // Populate the payment list
         payment_list.fetch()
             .complete(function () {
-                // Render message mist
+                // Render payment mist
                 payment_listview = new PaymentListView({ collection: payment_list });
                 payment_listview.render();
 
                 // Handle new posts and errors
                 socket.on('payment', function (data) {
                     if (data.error) {
-                        alert('Your message must be at least one character long and not contain whitespace only');
+                        alert('Payment list in null.');
                     } else {
-                        payment_list.create({price: data.message, types: data.types, created: data.created});
+                        payment_list.create({price: data.payments, types: data.types, created: data.created});
                         payment_listview.render();
                     }
                 });

@@ -19,3 +19,7 @@ a {
 	margin: 0 auto;
 	border: 1px solid #ccc;
 }
+
+#total {
+	margin-left: 10px;
+}

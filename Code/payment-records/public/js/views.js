@@ -3,7 +3,7 @@ var PaymentView, PaymentListView;
 
 // View for messages
 PaymentView = Backbone.Marionette.ItemView.extend({
-    template: '#message-item',
+    template: '#payment-item',
 
     tagName: 'li',
 
@@ -29,8 +29,8 @@ PaymentListView = Backbone.Marionette.CollectionView.extend({
         this.container.empty();
 
         // Render messages
-        this.collection.each(function (message) {
-            var view = new PaymentView({ model: message});
+        this.collection.each(function (payment) {
+            var view = new PaymentView({ model: payment});
             this.container.append(view.render().el);
         }, this);
     }
