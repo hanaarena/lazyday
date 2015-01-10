@@ -1,3 +1,5 @@
+@charset 'utf-8'
+
 body {
 	padding-top: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -14,6 +16,7 @@ a {
 
 .pay-list {
 	width: 500px;
+	height: 500px;
 	height: auto;
 	/*overflow: scroll;*/
 	margin: 0 auto;
