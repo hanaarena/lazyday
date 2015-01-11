@@ -29,7 +29,8 @@
   transform: translate(-50%, -50%);
   width: 10em;
   height: 10em;
-  box-shadow: inset 0 0 0 1em #222  ;
+  z-index: 99;
+  box-shadow: inset 0 0 0 1em #222;
 }
 .loader:after {
   width: 5.2em;
@@ -62,4 +63,12 @@
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+.dialogs-shadow {
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
 }
