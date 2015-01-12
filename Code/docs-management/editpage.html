@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html" charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit">
+		<meta name="keywords" content="P2P网贷论坛,投资理财,网络理财,网络贷款,网贷,融资,投哪网论坛" />
+		<meta name="description" content="投哪网P2P网贷论坛是投资理财用户交流的乐园,学习和交流更多的投资理财、网络理财、网络贷款、融资经验和技巧，上投哪网" />
+		<meta HTTP-EQUIV="Pragma"   CONTENT="no-cache">    
+		<meta HTTP-EQUIV="Cache-Control"   CONTENT="no-cache">    
+		<meta HTTP-EQUIV="Expires"   CONTENT="0">
+		<link rel="stylesheet" type="text/css" href="./static/css/licai.css">
+		<link rel="stylesheet" type="text/css" href="./static/css/global.css">
+		<title>资料上传-投哪网论坛</title>
+	</head>
+<body>
+	<div class="pg-container-content" style="background: #edefef;">
+	    <div class="container_10">
+	        <div class="head">
+	             <p class="f14 mtb13 st">
+	                <a href="/" class="mr5">论坛首页</a>>
+	                <a href="/" class="mr5">板块列表</a>>
+	                <a href="/" class="mr5">理财资料</a>>
+	                <a href="/" class="mr5">理财资料管理</a>>
+	                <a href="javascript:void(0);">资料编辑</a>
+	            </p>
+	            <div class="upload-banner h60 txtC mb20" style="background-color:#222"></div>
+	        </div>
+	    </div>
+    		<!-- height attribute is for test ->del -->
+    		<div class="editpage-main">
+            	<div class="left">
+            		<div class="left-userinfo">
+                    	<b>zhongxiang</b>
+                        <img src="./static/img/person-unknown.png" alt="" width="159" class="mt5 mb5" onerror="javascript:this.src='./static/img/person-unknown.png'">
+                        <span class="f12 h20" id="invest-lv">用户等级：<em class="blue invest-lv LV3"></em>稍有积蓄</span><br>
+                        <span class="f12 h20">注册时间：<em>2014-08-08</em></p>
+                    </div>
+            	</div>
+            	
+            	<div class="right update-form">
+    				<div style="margin-top: 20px;">
+    					<label for="update-form-title" class="">标题<em class="red">*</em>：</label>
+    					<input id="update-form-title" class="inputCommand update-form-title" type="text" placeholder="30字以内" />
+    					<span class="update-form-access"></span>
+    				</div>
+    				<div>
+    					<label for="update-form-desc" class="">简介：</label>
+            			<textarea id="update-form-desc" class="inputCommand update-form-area"></textarea>
+            			<span class="update-form-access2"></span>
+            		</div>
+    				<div>
+    					<label for="typeSelect" class="">分类<em class="red">*</em>：</label>
+	                    <select id="typeSelect">
+	                        <option>P2P众筹</option>
+                            <option>股票期货</option>
+                            <option>基金外汇</option>
+                            <option>保险债劵</option>
+                            <option>商业投资</option>
+                            <option>财务管理</option>
+                            <option>经营管理</option>
+                            <option>金融管理</option>
+                            <option>宏观经济</option>
+                            <option>创富故事</option>
+	                    </select>
+    				</div>
+    				<div>
+    					<label for="update-form-from" class="">出处<em class="red">*</em>：</label>
+            			<input id="update-form-from" class="inputCommand update-form-from"  type="text" value="" placeholder="文章出处" /> 
+    				</div>
+    				<div>
+    					<label for="update-form-author" class="">作者<em class="red">*</em>：</label>
+            			<input id="update-form-author" class="inputCommand update-form-author"  type="text" value="" placeholder="如是本人请填写本人" />
+    				</div>
+    				<div>
+    					<label for="update-form-tag" class="">标签：</label>
+            			<input id="update-form-tag" class="inputCommand update-form-tag"  type="text" value="" placeholder="多个标签请以逗号隔开" />
+    				</div>
+    				<div>
+    					<label for="update-form-tag" class="">封面：</label>
+    					<img class="update-form-cover" src="" width="87" height="116" alt="" />
+    				</div>
+    				<!-- 封面更新 cover update -->
+    				<div>
+    					<form id="coverupdate" name="update-cover-form" method="POST" action="" enctype="multipart/form-data">
+    						<div class="cover-pre">
+	                            <label for="update-cover-name2" class="">封面更新：</label>                         
+	                            <div class="update-cover-file update-cover-select ml20" style="*display:inline;">
+	                                <span style="text-align: center">重新上传</span>
+	                                <input type="file" name="update-cover-file" class="update-cover-filebtn" onChange="postCover(this);" />
+	                            </div>
+	                        </div>
+
+	                        <div class="cover-next">
+	                        	<label for="update-cover-name" class="">封面名称：</label>
+	                        	<span class="update-cover-name update-form-span"></span>&nbsp;&nbsp;
+
+	                            <div class="update-cover-file update-cover-upbtnarea" style="*display:inline;">
+	                                <span style="text-align: center">上传</span>
+	                                <input name="fileinfo-cover-submit" type="submit" class="update-cover-upbtn" onClick="unbindBeforeLoad();" value="" />
+	                            </div>&nbsp;&nbsp;
+	                            <div class="update-cover-file update-cover-reselect">
+	                                <span class="cover-reselect" style="text-align: center;">重新选择</span>
+	                                <input name="update-cover-reselect" type="button" style="" value="" />
+	                            </div>
+	                        </div>
+                        </form>
+    				</div>
+    				<!-- 文件更新 file update -->
+    				<div>
+    					<form id="fileupdate" name="update-file-form" method="POST" action="" enctype="multipart/form-data">
+    						<div class="file-pre">
+    							<label for="update-form-filename2" class="">文件更新：</label>
+    							<div class="update-cover-file update-file-select" style="*display:inline;">
+	                                <span style="text-align: center">浏览</span>
+	                                <input type="file" name="update-file-file" class="update-file-filebtn" onChange="postFile(this);" />
+                            	</div>
+    						</div>
+
+    						<div class="file-next">
+    							<label for="update-file-name" class="">文件名称：</label>
+	    						<span class="update-file-name update-form-span"></span>		                         
+
+	                            <div class="update-cover-file update-cover-upbtnarea update-file-upbtnarea" style="*display:inline;">
+	                                <span style="text-align: center">上传</span>
+	                                <input name="fileinfo-file-submit" type="submit" class="update-cover-upbtn update-file-upbtn" onClick="unbindBeforeLoad();" value="" />
+	                            </div>
+	                            <div class="update-cover-file update-file-reselect" style="margin: 0px 0px 0 0px;display: inline-block;">
+	                                <span class="file-reselect" style="text-align: center;">重新选择</span>
+	                                <input name="update-file-reselect" class="update-file-reselect" type="button" style="" value="" />
+	                            </div>
+	    					</div>
+                        </form>
+    				</div>
+    				<!-- update form submit -->
+    				<div>
+						<input type="button" name="update-form-sub" class="upbtnCommand update-form-sub" value="提交 " />
+    				</div>
+            	</div>
+        	</div>
+	    </div>
+	</div>
+
+<script src="./static/js/jquery.min.js?rev=@@hash"></script>
+<script src="./static/js/jquery.global.js?rev=@@hash"></script>
+<script src="./static/js/rxdai.js?rev=@@hash"></script>
+<script type="text/javascript" src="./static/vendor/jquery.form.min.js"></script>
+<script type="text/javascript" src="./static/js/licai.js"></script>
+
+<script type="text/javascript">
+    /*判断用户是否登录*/
+    rxdai.isLogin(function(data) {
+        rxdai.changStatus(data);
+        if(!data.result) {
+            // for test -> del
+            alert("请先登录");
+            window.location.href = "http://172.168.20.247:14803/user-login.html";
+        }
+    }); 
+</script>
+
+<script type="text/javascript">
+	var updatecoverUrl = '';
+	var updatefileUrl = '';
+	var fileId = 48;//test
+
+	var newCoverUrl = '';
+	var newFileUrl = '';
+
+	$('.file-next').hide();
+	$('.cover-next').hide();
+
+	rxdai.editFinance = {};
+
+	rxdai.editFinance.getFileinfo = function() {
+
+		var params = {
+			'method': 'loadFinac',
+			'id': fileId //test
+		};
+
+		rxdai.loadData(____licai____, params, 
+	        function(data) {
+	            //console.log(data);
+	            var result = data.result;
+
+	            //for test ↓↓↓
+	            var pic = result.litPic;
+	            var pre = pic.substring(0,21) + ':9086';
+	            var next = pic.substring(21);
+	            pic = pre+next;
+	            console.log(pic);
+	            //↑↑↑
+
+	            $('.update-form-title').val(result.title);
+	            $('.update-form-area').val(result.content);
+	            $('#typeSelect option').eq(result.classify-1).attr('selected','selected');
+	            $('.update-form-from').val(result.source);
+	            $('.update-form-author').val(result.author);
+	            $('.update-form-tag').val(result.labels);
+	            $('.update-form-cover').attr('src', pic);
+	        },
+	        function(data) {
+	            rxdai.doFailed(data);
+	    });
+	};
+
+	rxdai.editFinance.postUpdate = function() {
+		/*var params = {
+			'method': 'updateFinanc',
+			'id': fileId,
+			'title': $('.update-form-title').val(result.title),
+            'content': $('.update-form-area').val(result.content),
+            'classify': $('#typeSelect option').eq(result.classify-1).attr('selected','selected'),
+            'source': $('.update-form-from').val(result.source),
+            'author': $('.update-form-author').val(result.author),
+            'labels': $('.update-form-tag').val(result.labels),
+            'litPic': newCoverUrl,
+            'localPath': newFileUrl
+		};
+		
+		rxdai.loadData(____licai____, params,
+			function(data) {
+				console.log(data);
+			},
+			function(data) {
+				rxdai.doFailed(data);
+		});*/
+	};
+
+	function LimitTitleArea(field) {
+		var maxlimit = 30;
+		/* Text length ->
+		console.log(field.value.length);*/
+		if (field.value.length > maxlimit) {
+	 		field.value = field.value.substring(0, maxlimit);
+		} else {
+			$('.update-form-access').html('还可输入' + (maxlimit - field.value.length)  + '字');
+		}
+	}
+
+	function LimitTextArea(field) {
+		var maxlimit = 400;
+		/* Text length ->
+		console.log(field.value.length);*/
+		if (field.value.length > maxlimit) {
+	 		field.value = field.value.substring(0, maxlimit);
+		} else {
+			$('.update-form-access2').html('还可输入' + (maxlimit - field.value.length)  + '字');
+		}
+	}
+
+	function updateCheck() {
+		if($('.update-form-title').val() == '') {
+            alert('标题不能为空');
+            $('.update-form-title').focus();
+            return false;
+        } else if($('.update-form-from').val() == '') {
+            alert('出处不能为空');
+            $('.update-form-from').focus();
+            return false;
+        } else if($('.update-form-author').val() == '') {
+            alert('作者不能为空');
+            $('.update-form-author').focus();
+            return false;
+        } else {
+            return true;
+        }
+	}
+
+	/* 标题框可输入数限制 */
+	$('.update-form-title').focus(function() {
+		if($(this).val() == '最多输入30个字') {
+			$(this).val('');
+		}
+	}).blur(function() {
+		if ($(this).val() == '') {
+			$(this).val('最多输入30个字');
+		}
+	}).keydown(function() {
+		LimitTitleArea(this);
+	}).keyup(function() {
+		LimitTitleArea(this);
+	}).keypress(function() {
+		LimitTitleArea(this);
+	});
+
+	/* 内容框可输入数限制 */
+	$('.update-form-area').focus(function() {
+		if($(this).val() == '最多输入400个字') {
+			$(this).val('');
+		}
+	}).blur(function() {
+		if ($(this).val() == '') {
+			$(this).val('最多输入400个字');
+		}
+	}).keydown(function() {
+		LimitTextArea(this);
+	}).keyup(function() {
+		LimitTextArea(this);
+	}).keypress(function() {
+		LimitTextArea(this);
+	});
+
+	/* 资料封面更新上传 ->return url */
+    $('#coverupdate').ajaxForm({
+        url: "/bbsFileUpLoad.do?dir=image",//cover 上传url
+        dataType: 'text',
+        beforeSend: function() {
+
+        },
+        uploadProgress: function(event, position, total, percentComplete) {
+            var percentVal = percentComplete + '%';
+            console.log("fileinfo-cover: " + percentVal, position, total);
+        },
+        success: function() {
+            
+        },
+        complete: function(xhr) {
+            /* get file cover url */
+            console.log("update fileinfo-cover url: " + xhr.responseText);           
+
+            var data = JSON.parse(xhr.responseText);
+            updatecoverUrl = data.url;
+            console.log(updatecoverUrl);
+
+            alert("上传成功");
+
+            /* 新封面路径 */
+            newCoverUrl = updatecoverUrl;
+
+            //$('.update-cover-select').show();
+
+            /* display re-select */
+            $('.update-cover-reselect').show();
+            $('.update-cover-upbtnarea').hide();
+        },
+        error: function(e) {
+            alert("上传失败");
+            console.log(e);
+        }
+    });
+
+	/* 资料主体更新上传 ->return url */
+    $('#fileupdate').ajaxForm({
+        url: "/bbsfinancingFileUpLoad.do?dir=file",//cover 上传url
+        dataType: 'text',
+        beforeSend: function() {
+
+        },
+        uploadProgress: function(event, position, total, percentComplete) {
+            var percentVal = percentComplete + '%';
+            console.log("fileinfo-cover: " + percentVal, position, total);
+        },
+        success: function() {
+            
+        },
+        complete: function(xhr) {
+            /* get file cover url */
+            console.log("update fileinfo-cover url: " + xhr.responseText);           
+
+            var data = JSON.parse(xhr.responseText);
+            updatefileUrl = data.url;
+            console.log(updatefileUrl);
+
+            alert("上传成功");
+
+            //此处应有一个全局监控是否有文件更新的变量
+            /* 新文件路径 */
+            newFileUrl = updatefileUrl;
+
+            //$('.update-file-select').show();
+
+            /* display re-select */
+            $('.update-file-reselect').show();
+            $('.update-file-upbtnarea').hide();
+        },
+        error: function(e) {
+            alert("上传失败");
+            console.log(e);
+        }
+    });
+
+	/* cover '重新选择' */
+	$('.update-cover-reselect').live('click', function() {
+		var file = $(".update-cover-filebtn");
+		file.after(file.clone().val(""));
+		file.remove();
+
+		$('.update-cover-name').html('');
+
+		$('.cover-pre').show();
+		$('.update-cover-upbtnarea').show();
+		$('.cover-next').hide();
+
+		unbindBeforeLoad();
+	});
+
+	/* file '重新选择' */
+	$('.update-file-reselect').live('click', function() {
+		var file = $(".update-file-filebtn");
+		file.after(file.clone().val(""));
+		file.remove();
+
+		$('.update-file-name').html('');
+
+		$('.file-pre').show();
+		$('.update-file-upbtnarea').show();
+		$('.file-next').hide();
+
+		unbindBeforeLoad();
+	});
+
+	$('.update-form-sub').click(function() {
+		if(updateCheck()) {            
+		    rxdai.fileUp.upload();
+		}
+	});
+
+	$(function() {
+		rxdai.editFinance.getFileinfo();
+	});
+	
+	
+</script>
+       
+</body>
+</html>

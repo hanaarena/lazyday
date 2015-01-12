@@ -1,0 +1,78 @@
+/** licai-login-form **/
+.licai-login-form {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 310px;
+	margin: 0 auto;
+	padding: 23px 0px 0px 20px;
+	background-color: #ffffff;
+	border: 1px solid #e0e0e0;
+	border-radius: 5px;
+	transform: translate(-50%, -50%);
+}
+
+.licai-login-form ul li { list-style: none; margin-bottom: 15px;}
+
+
+/** f1 input **/
+.licai-login-form .f1 {
+	border: 1px solid #dcdcdc;
+	padding-left: 45px;
+	height: 36px;
+	line-height: 34px;
+	width: 243px;
+	color: #7e7e7e;
+	background-repeat: no-repeat;
+	background-image: url(https://www.touna.cn/static/img/icon/icon-login.png);
+}
+
+/** f2 input **/
+.licai-login-form .f2 {
+	border: 1px solid #dcdcdc;
+	padding-left: 45px;
+	height: 36px;
+	line-height: 34px;
+	width: 243px;
+	color: #7e7e7e;
+	background-repeat: no-repeat;
+	background-image: url(https://www.touna.cn/static/img/icon/icon-login.png);
+	background-position: 0 -34px;
+}
+
+/** Submit button **/
+.licai-login-form .sub { 
+	margin-top: 7px;
+	width: 287px;
+	height: 36px;
+	line-height: 34px;
+	vertical-align: middle;
+	text-align: center;
+	color: #fff;
+	font-size: 18px;
+	border: none;
+	background-color: #72cc22;
+	border: 1px solid #72cc22;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	cursor: pointer;
+	transition:  all .4s;
+}
+
+.licai-login-form .un:focus,#lg .pd:focus { outline-color: #9D9D9D;}
+.licai-login-form .sub:hover { background-color: #79D826;}
+.licai-login-form .sub:focus { outline-color:#fff;}
+
+/* login failed alert */
+.failed {
+	width: 240px;
+	height: 36px;
+	background-color: #f2dede;
+	color: #a94442;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+.failed strong { line-height: 34px;}

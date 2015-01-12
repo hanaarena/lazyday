@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html" charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="renderer" content="webkit">
+        <meta name="keywords" content="P2P网贷论坛,投资理财,网络理财,网络贷款,网贷,融资,投哪网论坛" />
+        <meta name="description" content="投哪网P2P网贷论坛是投资理财用户交流的乐园,学习和交流更多的投资理财、网络理财、网络贷款、融资经验和技巧，上投哪网" />
+        <meta   HTTP-EQUIV="Pragma"   CONTENT="no-cache">    
+        <meta   HTTP-EQUIV="Cache-Control"   CONTENT="no-cache">
+        <meta   HTTP-EQUIV="Expires"   CONTENT="0">
+        <link rel="stylesheet" type="text/css" href="./static/css/licai.css">
+        <link rel="stylesheet" type="text/css" href="./static/css/global.css">
+        <title>资料上传-投哪网论坛</title>
+    </head>
+    <body>
+        <div class="pg-container-content" style="background: #edefef;">
+            <div class="container_10">
+                <div class="head">
+                     <p class="f14 mtb13 st">
+                        <a href="/" class="mr5">论坛首页</a>>
+                        <a href="/" class="mr5">板块列表</a>>
+                        <a href="/" class="mr5">理财资料</a>>
+                        <a href="javascript:;">文档上传</a>
+                    </p>
+                    <div class="upload-banner h60 txtC mb20"></div>
+                </div>
+            </div>
+            <div class="fileinfo-main container_10 mb30 box">
+                <div class="fileinfo-pre">
+                    <form id="fileupload" method="POST" action="" enctype="multipart/form-data" target="form_iframe">
+                        <div class="up-btn-area">
+                            <!-- 用样式来重写button IE不支持->用图片代替 -->
+                            <div class="upbtnCommand up-btn" style="position: relative; margin: 76px auto;">
+                                <img id="tempimg" dynsrc="" src="" style="display:none" /> 
+                                <span class="f30" style="text-align: center;"><p>上传文件</p></span>
+                                <input class="fileupload" type="file" name="myfile" multiple onChange="postFile(this);">
+                            </div>
+                            <div class="progress hide"><ul><li class="bar"></li><li class="percent">0%</li></ul></div>
+                        </div>
+                    </form>
+
+                    <div class="up-info-append ml20" style="display: none;">
+                        <!-- form嵌套冲突 ↓↓ -->
+                        <!-- 用ajax来获取表单信息 -->
+                        <div id="fileinfo-detail" target="">
+                            <div>
+                                <label for="fileinfo-title" class="mt">标题<em class="red">*</em>：</label>
+                                <input id="fileinfo-title" class="fileinfo-title inputCommand" type="text" value="" placeholder="30字以内" />
+                            </div>
+                            <div>
+                                <label for="fileinfo-desc" class="">简介：</label>
+                                <textarea id="fileinfo-desc" class="fileinfo-desc inputCommand" style="vertical-align: top; width:760px; height:220px; resize:none;"></textarea>
+                                <span class="update-form-access"></span>
+                            </div>
+                            <div class="fileinfo-cover-list">
+                                <!-- use jq.form来提交表单 返回封面cover url -->
+                                <form id="coverupload" name="fileinfo-cover-form" method="POST" action="" enctype="multipart/form-data">
+                                    <label for="fileinfo-cover" class="">上传封面：</label>
+                                    <input type="text" id="fileinfo-cover-name" disabled="disabled" class="fileinfo-cover-name" value="" />&nbsp;&nbsp;
+                                    <div class="fileinfo-cover-file ml20 iblock" style="*display:inline; margin-top: 0;">
+                                        <span style="text-align: center">浏览</span>
+                                        <input type="file" name="fileinfo-cover" class="fileinfo-cover-filebtn" onChange="postCover(this);" />
+                                    </div>&nbsp;&nbsp;
+                                    <div class="fileinfo-cover-file fileinfo-cover-upbtnarea ml20 iblock" style="*display:inline;">
+                                        <span style="text-align: center">上传</span>
+                                        <input name="fileinfo-cover-submit" type="submit" class="fileinfo-cover-upbtn" onClick="unbindBeforeLoad();" value="" />
+                                    </div>
+                                    <div class="fileinfo-cover-file fileinfo-cover-reselect ml20 iblock" style="*display:inline; cursor: pointer; display:none;">
+                                        <span class="re-select">重新上传</span>
+                                        <input name="fileinfo-cover-reselect" type="button" class="" style="" value="" />
+                                    </div>
+                                </form>
+                            </div>
+                            <div style="display: none;" class="fileinfo-cover-url"><!-- 存储返回的url --></div>
+                            <div style="">
+                                <label for="typeSelect" class="">分类<em class="red">*</em>：</label>
+                                <select name="fileinfo-cate" id="typeSelect">
+                                    <option>P2P众筹</option>
+                                    <option>股票期货</option>
+                                    <option>基金外汇</option>
+                                    <option>保险债劵</option>
+                                    <option>商业投资</option>
+                                    <option>财务管理</option>
+                                    <option>经营管理</option>
+                                    <option>金融管理</option>
+                                    <option>宏观经济</option>
+                                    <option>创富故事</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="fileinfo-from" class="">出处<em class="red">*</em>：</label>
+                                <input type="text" id="fileinfo-from" class="fileinfo-from inputCommand" placeholder="" placeholder="文章出处" />
+                            </div>
+                            <div>
+                                <label for="fileinfo-author" class="">作者<em class="red">*</em>：</label>
+                                <input type="text" id="fileinfo-author" class="fileinfo-author inputCommand" placeholder="如是本人请填写本人" />
+                            </div>
+                            <div>
+                                <label for="fileinfo-tag" class="">标签：</label>
+                                <input type="text" id="fileinfo-tag" class="fileinfo-tag inputCommand" value="" placeholder="多个标签请以逗号隔开" />
+                            </div>
+                            <div style="text-align: center">
+                                <input class="f30 mb20 fileinfo-sub upbtnCommand" name="file-submit" type="button" value="完成上传" />
+                                <span class="fileinfo-ctrl"></span>
+                            </div>          
+                        </div>
+                    </div>
+                    <div id="form_hidden">
+                        <iframe id="form_iframe" name="form_iframe" style="display:none" mce_style="display:none;"></iframe>
+                    </div>
+                    <!-- 文件上传提示信息 -->
+                    <div class="up-desc">
+                        <h3 class="titleCommand">温馨小提示</h3>
+                        <p>1.请勿上传已设置加密或只读的文档，不支持此类文档;</p>
+                        <p>2.您可以上传关于理财方面的资料，每次最多可上传20份，每份的大小应小于200MB,支持如下的文档类型：</p>
+                        <div class="lh25 mt5 mb10 ml35">
+                            <em class="ic ic-doc mr5"></em>doc,docx
+                            <em class="ic ic-ppt ml10 mr5"></em>ppt,pptx
+                            <em class="ic ic-xls ml10 mr5"></em>xls,xlsx
+                            <em class="ic ic-vsd ml10 mr5"></em>vsd
+                            <em class="ic ic-pot ml10 mr5"></em>pot
+                            <em class="ic ic-pps ml10 mr5"></em>pps
+                            <em class="ic ic-rtf ml10 mr5"></em>rtf
+                            <br>
+                            <em class="ic ic-wps mr5"></em>wps
+                            <em class="ic ic-et ml10 mr5"></em>et
+                            <em class="ic ic-dps ml10 mr5"></em>dps
+                            <em class="ic ic-pdf ml10 mr5"></em>pdf
+                            <em class="ic ic-txt ml10 mr5"></em>txt
+                            <em class="ic ic-epub ml10 mr5"></em>epub
+                        </div>
+                        <p>3.上传涉及侵权与违法内容的文档将会被移除。如何判断文档是否侵权？查看<a href="#" class="link">服务条款</a>。</p>
+                        <p>4.如何上传文档或上传有问题需要帮助？查看<a href="#" class="link">新手帮助</a>和<a href="javascript:void(0);" class="link showDialogs">意见反馈</a>。</p>
+                        <p>5.为营造绿色网络环境，严禁上传含有淫秽色情及低俗信息等文档，让我们一起携手共同打造健康文库。</p>
+                    </div>
+                </div>
+
+                <!-- file upload success -->
+                <div class="fileinfo-success" style="*display: none;">
+                    <div class="up-success">
+                        <!-- 用样式来重写button IE不支持->用图片代替 -->
+                        <div class="up-success-area" style="position: relative; margin: 76px auto;">
+                            <span class="f36 tips-color"><b>恭喜您！文档上传成功</b></span>
+                            <br /><br /><br />
+                            <a href="upload.html" class="f30 mr20 up-success-btn upbtnCommand" style="display: inline;">继续上传</a><br /><br />
+                            <span class="f16">注：如文档含有盗版内容，请立刻删除  <a href="management.html" class="tips-color">查看已上传文档>></a></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- user suggestion box -->
+                <!-- use ajax XHR to upload data -->
+                <div name="dialogs" class="dialogs hide">
+                    <div class="">
+                        <ul class="sug-title h40">
+                            <li class="f20 ml10"><b>您的建议</b><i class="sug-close">&times;</i></li>
+                        </ul>
+                        <ul class="sug-content">
+                            <li>
+                                <textarea cols="65" rows="7" placeholder="亲爱的投哪网社区用户：请在这里输入您的意见、建议，我们将用心倾听，不断优化产品，为您提供更优质的服务（500字以内）。"></textarea>
+                            </li>
+                        </ul>
+                        <ul class="sug-img" style="margin-left: 46px;">
+                            <!-- 问题反馈 img -->
+                            <form id="sugupload" method="POST" action="" enctype="multipart/form-data" target="">
+                                <li>
+                                    <div style="*display:inline;" class="sug-file">
+                                        <input type="file" name="sug-file" class="sug-file-btn" />
+                                    </div>
+                                    <!-- if选中图片 用文件名替换sug-file-tip内容 -->
+                                    <span class="sug-file-tip">
+                                        <span>上传图片</span>
+                                        <span>您可以上传图片描述问题</span>
+                                    </span>
+                                </li>
+                            </form>
+                        </ul>
+                        <ul style="display: none;" class="sug-img-url"><!-- 存储返回的url --></ul>
+                        <ul class="sug-info" style="margin-left: 46px;">
+                            <li><lable for="sug-info-tel">联系电话：</lable><input type="text" name="sug-info-tel" value="" /></li>
+                            <li style="margin:14px 14px;"><lable for="sug-info-email">E-mail：</lable><input type="text" name="sug-info-email" value="" /></li>
+                        </ul>
+                        <ul class="sug-submit" style="margin-left: 46px;">
+                            <span>请在此留下您的联系方式，我们期待与您取得联系，您的私人信息将受到严格保密。</span>
+                            <li><input type="button" name="sug-submit-btn" class="sug-submit-btn upbtnCommand" value="提交" /><!-- <span>发送</span> --></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dialogs-shadow hide"></div>
+
+        <script src="./static/js/jquery.min.js?rev=@@hash"></script>
+        <script src="./static/js/jquery.global.js?rev=@@hash"></script>
+        <script src="./static/js/rxdai.js?rev=@@hash"></script>
+        <script type="text/javascript" src="./static/vendor/jquery.form.min.js"></script>
+        <script type="text/javascript" src="./static/js/licai.js"></script>
+        
+        <script type="text/javascript">
+            /*判断用户是否登录*/
+            rxdai.isLogin(function(data) {
+                rxdai.changStatus(data);
+                if(!data.result) {
+                    // for test -> del
+                    alert("请先登录");
+                    window.location.href = "http://172.168.20.247:14803/user-login.html";
+                }
+            }); 
+        </script>
+
+    </body>
+</html>
