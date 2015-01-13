@@ -499,7 +499,7 @@ h3 {
 	height: 20px;
 	cursor: pointer;
 	display: inline-block;
-	background: url(./static/img/licai-star.png);
+	background: url(../img/licai-star.png);
 }
 
 .rangeStar i {
