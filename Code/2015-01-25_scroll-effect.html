@@ -1,0 +1,77 @@
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.1/jquery-1.10.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://cdn.staticfile.org/animate.css/3.2.0/animate.min.css">
+	<style type="text/css">
+		.wrap {
+			width: 215px;
+			margin: 0 auto;
+		}
+
+		.hide {
+			opacity: 0;
+		}
+
+		.show {
+			display: block;
+		}
+
+		.one, .two, .three, .four, .five {
+			width: 200px;
+			display: inline-block;
+			font-family: 'Microsoft Yahei';
+			font-size: 50px;
+			color: #edcce1;
+			font-weight: bold;
+			margin-bottom: 10px;
+		}
+
+		.box {
+			width: 250px;
+			height: 250px;
+			margin-bottom: 20px;
+			margin-left: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="one">DOWN</div>
+		<div class="box"></div>
+		
+		<div class="two">DOWN</div>
+		<div class="box"></div>
+
+		<div class="three hide">Fade in left</div>
+		<div class="box"></div>
+
+		<div class="four hide">Fade in right</div>
+		<div class="box"></div>
+
+		<div class="five"></div>
+	</div>
+
+	<script type="text/javascript">
+	$(window).scroll(function () {
+		$('.three').each(function(){
+			var imagePos = $(this).offset().top;
+			var topOfWindow = $(window).scrollTop();
+
+			if (imagePos < topOfWindow+520) {
+				$(this).removeClass('hide').addClass("animated fadeInLeft show");
+			}		
+		});
+
+		$('.four').each(function(){
+			var imagePos = $(this).offset().top;
+			var topOfWindow = $(window).scrollTop();
+
+			if (imagePos < topOfWindow+520) {
+				$(this).removeClass('hide').addClass("animated fadeInRight show");
+			}		
+		});
+	});
+	</script>
+</body>
+</html>
