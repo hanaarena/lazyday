@@ -1,5 +1,11 @@
-## Õ¼¸ö¿Ó
+# å ä¸ªå‘
 
-¼ÇÂ¼ÏÂÆ½ÈÕÀï×öµÄĞ¡¶«Î÷»òÕß·­ÒëµÄÎÄÕÂ¡¢API.
+è®°å½•ä¸‹å¹³æ—¥é‡Œåšçš„å°ä¸œè¥¿æˆ–è€…ç¿»è¯‘çš„æ–‡ç« ã€API.
 
-since Autumn ¡¤ 2014
+## ç›®å½•
+
+-  [try nodejs socket.io](https://github.com/hanaarena/lazyday/tree/master/Code/simple_webchat)
+-  [try Mongodb](https://github.com/hanaarena/lazyday/tree/master/Code/payment-records)
+-  [try æ›´å¥½çš„é¡µé¢ç å­—é£æ ¼with TOUNA](https://github.com/hanaarena/lazyday/tree/master/Code/docs-management)
+
+since Autumn Â· 2014
