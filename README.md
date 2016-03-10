@@ -1,5 +1,10 @@
-## 占个坑
+## :zzz:
 
-记录下平日里做的小东西或者翻译的文章、API.
+little lanz status
 
-since Autumn · 2014
+## Content
+
+-  [Learn nodejs socket.io](https://github.com/hanaarena/lazyday/tree/master/Code/simple_webchat)
+-  [Learn Mongodb](https://github.com/hanaarena/lazyday/tree/master/Code/payment-records)
+
+since Autumn 路 2014
