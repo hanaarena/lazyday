@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Color demo</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      function shadeBlend(p,c0,c1) {
+        var n=p<0?p*-1:p,u=Math.round,w=parseInt;
+        if(c0.length>7){
+        var f=c0.split(","),t=(c1?c1:p<0?"rgb(0,0,0)":"rgb(255,255,255)").split(","),R=w(f[0].slice(4)),G=w(f[1]),B=w(f[2]);
+        return "rgb("+(u((w(t[0].slice(4))-R)*n)+R)+","+(u((w(t[1])-G)*n)+G)+","+(u((w(t[2])-B)*n)+B)+")"
+        }else{
+        var f=w(c0.slice(1),16),t=w((c1?c1:p<0?"#000000":"#FFFFFF").slice(1),16),R1=f>>16,G1=f>>8&0x00FF,B1=f&0x0000FF;
+        return "#"+(0x1000000+(u(((t>>16)-R1)*n)+R1)*0x10000+(u(((t>>8&0x00FF)-G1)*n)+G1)*0x100+(u(((t&0x0000FF)-B1)*n)+B1)).toString(16).slice(1)
+        }
+      }
+    </script>
+    <script type="text/javascript">
+      var color1 = "#FF343B";
+      var shadedcolor1 = shadeBlend(0.75, color1);
+      var shadedcolor2 = shadeBlend(0.70, color1);
+      var shadedcolor3 = shadeBlend(0.65, color1);
+      var shadedcolor4 = shadeBlend(0.60, color1);
+      var color2 = "#FFFFFF";
+      // First param is the same between '-' & '+'
+      var shadedcolor11 = shadeBlend(-0.13, color2, '#000000');
+      var shadedcolor22 = shadeBlend(-0.2, color2, '#000000');
+      var shadedcolor33 = shadeBlend(-0.3, color2, '#000000');
+      var shadedcolor44 = shadeBlend(-0.4, color2, '#000000');
+      var arr = [];
+      arr = Array.prototype.concat.call([shadedcolor1, shadedcolor2, shadedcolor3, shadedcolor4]);
+      var arr2 = [];
+      arr2 = Array.prototype.concat.call([shadedcolor11, shadedcolor22, shadedcolor33, shadedcolor44]);
+    	for (var i = 0; i < arr.length; i++) {
+    		var el = document.createElement('div');
+    		el.style.backgroundColor = arr[i];
+    		document.body.appendChild(el);
+    	}
+    	for (var i = 0; i < arr2.length; i++) {
+    		var el = document.createElement('div');
+    		el.style.backgroundColor = arr2[i];
+    		document.body.appendChild(el);
+    	}
+    </script>
+    <style type="text/css">
+    	div {
+    		float: left;
+    		width: 50px;
+    		height: 50px;
+    	}
+    </style>
+  </body>
+</html>
