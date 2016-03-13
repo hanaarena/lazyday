@@ -16,14 +16,15 @@
 
 			opt.prev = document.querySelector(opt.prev);
 			opt.next = document.querySelector(opt.next);
+
 			opt.prev.addEventListener('click', function (e) {
 				e.preventDefault();
 				that.prev();
-			})
+			});
 			opt.next.addEventListener('click', function (e) {
 				e.preventDefault();
 				that.next();
-			})
+			});
 		}
 	}
 
@@ -31,7 +32,8 @@
 		if (this.currentPostion == 0) {
 			this.slideTo(this.items.length - 1);
 		} else {
-			this.slideTo(this.currentPostion - 1);
+			this.currentPostion--;
+			this.slideTo(-1);
 		}
 	};
 
@@ -39,22 +41,22 @@
 		if (this.currentPostion == this.items.length - 1) {
 			this.slideTo(0);
 		} else {
-			this.slideTo(this.currentPostion + 1);
+			this.currentPostion++;
+			this.slideTo(1);
 		}
 	}
 
 	LnSlider.prototype.slideTo = function (pos) {
-		console.info('positon: ' + pos);
+		console.info('positon: ' + this.currentPostion);
 		
 		var targetPos = this.getTargetPos(pos);
 		console.info('targetPos: ' + targetPos);
-		var direction = this.currentPostion > pos ? 1 : -1;
 
 		this.slider.style.right = targetPos + 'px';
 	}
 
 	LnSlider.prototype.getTargetPos = function (pos) {
-		var currentPos, targetPos;
+		var currentPos = 0, targetPos;
 		currentPos = this.slider.style.right;
 		if (currentPos) currentPos = parseInt(currentPos);
 		console.info('currentPos: ' + currentPos);
