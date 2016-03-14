@@ -30,19 +30,21 @@
 
   LnSlider.prototype.prev = function () {
     if (this.currentPostion == 0) {
+      this.currentPostion = this.items.length - 1;
       this.slideTo(this.items.length - 1);
     } else {
       this.currentPostion--;
-      this.slideTo(-1);
+      this.slideTo(this.currentPostion);
     }
   };
 
   LnSlider.prototype.next = function () {
     if (this.currentPostion == this.items.length - 1) {
+      this.currentPostion = 0;
       this.slideTo(0);
     } else {
       this.currentPostion++;
-      this.slideTo(1);
+      this.slideTo(this.currentPostion);
     }
   }
 
@@ -56,12 +58,8 @@
   }
 
   LnSlider.prototype.getTargetPos = function (pos) {
-    var currentPos = 0, targetPos;
-    currentPos = this.slider.style.right;
-    if (currentPos) currentPos = parseInt(currentPos);
-    console.info('currentPos: ' + currentPos);
-
-    targetPos = currentPos + this.itemWidth * pos;
+    var targetPos;
+    targetPos = this.itemWidth * pos;
 
     return targetPos;
   }
