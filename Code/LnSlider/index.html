@@ -7,14 +7,14 @@
 
 <body>
   <div class="container">
-    <div class="slider_wrapper">
-      <ul id="image_slider">
-        <li><img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=1&w=650&h=400"></li>
-        <li><img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=2&w=650&h=400"></li>
-        <li><img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=3&w=650&h=400"></li>
-        <li><img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=4&w=650&h=400"></li>
-        <li><img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=5&w=650&h=400"></li>
-        <li><img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=6&w=650&h=400"></li>
+    <div class="wrapper">
+      <ul id="slider">
+        <li><div style="background-color: #00AA88"></div></li>
+        <li><div style="background-color: #ffae73"></div></li>
+        <li><div style="background-color: #4b76aa"></div></li>
+        <li><div style="background-color: #59aa59"></div></li>
+        <li><div style="background-color: #c6806b"></div></li>
+        <li><div style="background-color: #4d8baa"></div></li>
       </ul>
       <span class="prev" id="prev"></span>
       <span class="next" id="next"></span>
@@ -23,9 +23,10 @@
   
   <script type="text/javascript" src="index.js"></script>
   <script type="text/javascript">
-    var slide = new LnSlider('.slider_wrapper', {
+    var slide = new LnSlider('.wrapper', {
       prev: '.prev',
-      next: '.next'
+      next: '.next',
+      autoplay: true
     });
   </script>
 </body>

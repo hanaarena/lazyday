@@ -8,4 +8,5 @@
 -  Show/Hide nav
 -  Autoplay
 -  Dot
+-  Slide effect mode
 -  Module

@@ -1,18 +1,18 @@
 .container {
 	width:100%;
 	height:400px;
-	background: white;	
+	background: white;
 }
 
-.slider_wrapper {
+.wrapper {
 	overflow: hidden;
 	position:relative;
 	width: 650px;
 	height:400px;
- 	margin: 0 auto;
+	margin: 0 auto;
 }
 
-#image_slider {
+#slider {
 	position: relative;
 	width: 1000%;
 	height: auto;
@@ -21,14 +21,19 @@
 	overflow: hidden;
 	padding:0px;
 	margin:0px;
-  transition: all .6s ease;
+	transition: all .6s ease;
 }
 
-#image_slider li {
+#slider li {
 	position: relative;
 	float: left;
 	width: 650px;
 	border-right: 1px solid #4a4a4a;
+}
+
+#slider li div {
+	width: 650px;
+	height: 400px;
 }
 
 .prev, .next {
@@ -45,10 +50,10 @@
 
 #prev {
 	background: #000 no-repeat center;
-	left: 0px;
+	left: 0;
 }
 
 #next {
 	background: #000 no-repeat center;
-	right: 0px;
+	right: 0;
 }
