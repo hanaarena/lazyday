@@ -38,6 +38,7 @@
 
 .prev, .next {
 	position:absolute;
+	display: none;
 	top: 120px;
 	height: 50px;
 	width: 30px;

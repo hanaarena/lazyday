@@ -16,6 +16,9 @@
       opt.prev = document.querySelector(opt.prev);
       opt.next = document.querySelector(opt.next);
 
+      opt.prev.style.display = 'block';
+      opt.next.style.display = 'block';
+
       opt.prev.addEventListener('click', function (e) {
         e.preventDefault();
         that.prev();
@@ -24,6 +27,8 @@
         e.preventDefault();
         that.next();
       });
+    } else if (opt.prev || opt.next) {
+      throw "Should both include prev & next Nav control elements!"
     }
 
     if (opt.autoplay) {
