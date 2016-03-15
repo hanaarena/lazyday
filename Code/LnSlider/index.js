@@ -10,14 +10,16 @@
     this.itemWidth = this.items[0].offsetWidth;
     this.currentPostion = 0;
 
+    // Use for cancels repeated action which was set up using setInterval.
+    this.nInterval;
+
     if (opt.prev && opt.next) {
       var that = this;
 
       opt.prev = document.querySelector(opt.prev);
       opt.next = document.querySelector(opt.next);
 
-      opt.prev.style.display = 'block';
-      opt.next.style.display = 'block';
+      opt.next.style.display = opt.prev.style.display = 'block';
 
       opt.prev.addEventListener('click', function (e) {
         e.preventDefault();
@@ -37,6 +39,11 @@
   }
 
   LnSlider.prototype.prev = function () {
+    if (this.options.autoplay) {
+      clearInterval(this.nInterval);
+      this.autoplay();
+    }
+
     if (this.currentPostion == 0) {
       this.currentPostion = this.items.length - 1;
       this.slideTo(this.items.length - 1);
@@ -47,6 +54,11 @@
   };
 
   LnSlider.prototype.next = function () {
+    if (this.options.autoplay) {
+      clearInterval(this.nInterval);
+      this.autoplay();
+    }
+
     if (this.currentPostion == this.items.length - 1) {
       this.currentPostion = 0;
       this.slideTo(0);
@@ -74,7 +86,7 @@
 
   LnSlider.prototype.autoplay = function () {
     var that = this;
-    setInterval(function() {
+    this.nInterval = setInterval(function() {
       that.currentPostion++;
       if (that.currentPostion == that.items.length) {
         that.currentPostion = 0;

@@ -5,8 +5,8 @@
 
 ## TODO
 
--  Show/Hide nav
--  Autoplay
+-  [x]Show/Hide nav
+-  [x]Autoplay
 -  Dot
 -  Slide effect mode
 -  Module
