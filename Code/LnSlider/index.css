@@ -1,60 +1,70 @@
 .container {
-	width:100%;
-	height:400px;
-	background: white;
+  width: 100%;
+  height: 400px;
+  background: white;
 }
 
 .wrapper {
-	overflow: hidden;
-	position:relative;
-	width: 650px;
-	height:400px;
-	margin: 0 auto;
+  position: relative;
+  width: 650px;
+  height:400px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.slide {
+  position: relative;
+  float: left;
+}
+
+.fade {
+  position: fixed;
+  opacity: 0;
+}
+
+.fade:first-child {
+  opacity: 1;
 }
 
 #slider {
-	position: relative;
-	width: 1000%;
-	height: auto;
-	right: 0;
-	list-style: none;
-	overflow: hidden;
-	padding:0px;
-	margin:0px;
-	transition: all .6s ease;
+  position: relative;
+  width: 1000%;
+  right: 0;
+  list-style: none;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  transition: all .6s ease;
 }
 
 #slider li {
-	position: relative;
-	float: left;
-	width: 650px;
-	border-right: 1px solid #4a4a4a;
+  width: 650px;
 }
 
 #slider li div {
-	width: 650px;
-	height: 400px;
+  width: 650px;
+  height: 400px;
 }
 
 .prev, .next {
-	position:absolute;
-	display: none;
-	top: 120px;
-	height: 50px;
-	width: 30px;
-	opacity: 0.6;
+  position: absolute;
+  display: none;
+  top: 120px;
+  height: 50px;
+  width: 30px;
+  opacity: 0.6;
 }
 
 .prev:hover, .next:hover {
-	opacity: 0.9;
+  opacity: 0.9;
 }
 
 #prev {
-	background: #000 no-repeat center;
-	left: 0;
+  background: #000 no-repeat center;
+  left: 0;
 }
 
 #next {
-	background: #000 no-repeat center;
-	right: 0;
+  background: #000 no-repeat center;
+  right: 0;
 }

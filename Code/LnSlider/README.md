@@ -2,11 +2,12 @@
 
 -  Loop
 -  Basic Nav
+-  Show/Hide nav
+-  Autoplay
+-  Slide effect mode
 
 ## TODO
 
--  [x]Show/Hide nav
--  [x]Autoplay
 -  Dot
--  Slide effect mode
--  Module
+-  Modularity
+-  Example
