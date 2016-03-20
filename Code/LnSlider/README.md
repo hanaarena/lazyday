@@ -5,9 +5,9 @@
 -  Show/Hide nav
 -  Autoplay
 -  Slide effect mode
+-  Dot
 
 ## TODO
 
--  Dot
 -  Modularity
 -  Example

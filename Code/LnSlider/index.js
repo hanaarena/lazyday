@@ -30,16 +30,59 @@
         that.next();
       });
     } else if (opt.prev || opt.next) {
-      throw "Should both include prev & next Nav control elements!"
+      throw 'Should both include prev & next Nav control elements!';
     }
 
     if (opt.autoplay) {
       this.autoplay();
     }
 
+    if (opt.dot) {
+      this.addDots();
+    }
+
+    if (opt.dotHover) {
+      var eles = document.querySelector('.dot').children;
+
+      for (var i = 0, len = eles.length; i < len; i++) {
+        var that = this;
+        eles[i].addEventListener('mouseover', function (e) {
+          e.preventDefault();
+
+          if (that.options.autoplay) {
+            clearInterval(that.nInterval);
+            that.autoplay();
+          }
+
+          that.currentPostion = e.target.getAttribute('data-id') - 1;
+
+          if (that.effect == 'fade') {
+            for (var n = 0, lens = that.items.length; n < lens; n++) {
+              if (n == that.currentPostion) { continue;}
+              that.fadeOut(n)
+            }
+
+            that.fadeIn(that.currentPostion);
+          } else {
+            that.slideTo(that.currentPostion, that.effect);
+          }
+        });
+      }
+    }
+
     // Set slider effect for each slide
     for (var i = 0, len = this.items.length; i < len; i++) {
       this.items[i].className += opt.effect ? opt.effect : 'slide';
+    }
+  }
+
+  var helper = {
+    removeClass: function (className) {
+      var eles = document.querySelectorAll('.'+className);
+      [].forEach.call(eles, function (el) {
+        // Link: http://stackoverflow.com/a/494046/1909011
+        el.className = el.className.replace(new RegExp(className), '');
+      });
     }
   }
 
@@ -80,8 +123,6 @@
 
       this.fadeOut(_pos);
       this.fadeIn(pos);
-
-      console.info(pos)
     } else {
       console.info('position: ' + this.currentPostion);
 
@@ -89,6 +130,12 @@
       console.info('target position: ' + targetPos);
 
       this.slider.style.right = targetPos + 'px';
+    }
+
+    if (this.options.dot) {
+      helper.removeClass('cur');
+      var eles = document.querySelector('.dot').children;
+      eles[pos].className += 'cur';
     }
   }
 
@@ -131,7 +178,7 @@
     tick();
   }
 
-  // Prev element to fade out
+  // Current element to fade out
   LnSlider.prototype.fadeOut = function (index) {
     var element = this.items[index];
     element.style.opacity = 1;
@@ -147,6 +194,34 @@
     }
 
     tick();
+  }
+
+  LnSlider.prototype.addDots = function () {
+    var dotContainer = document.createElement('div');
+    var dotFloat = this.options.dotFloat ? this.options.dotFloat : 'center';
+    dotContainer.className = 'dot';
+
+    // Set dot list float: left | center | right
+    switch (dotFloat) {
+      case 'left':
+        dotContainer.className += ' float-left';
+        break;
+      case 'right':
+        dotContainer.className += ' float-right';
+        break;
+      default:
+        break;
+    }
+
+    // Generate dot element list
+    for (var i = 0, len = this.items.length; i < len; i++) {
+      var spanEle = document.createElement('span');
+      spanEle.setAttribute('data-id', i+1);
+      i === 0 && (spanEle.className = 'cur');
+      dotContainer.appendChild(spanEle);
+    }
+
+    this.container.appendChild(dotContainer);
   }
 
   window.LnSlider = LnSlider;

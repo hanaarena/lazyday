@@ -7,9 +7,42 @@
 .wrapper {
   position: relative;
   width: 650px;
-  height:400px;
+  height: 400px;
   margin: 0 auto;
   overflow: hidden;
+}
+
+.wrapper .dot {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 10px;
+}
+
+.wrapper .dot.float-left {
+  text-align: left;
+}
+
+.wrapper .dot.float-right {
+  text-align: right;
+}
+
+.wrapper .dot span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  overflow: hidden;
+  margin-right: 10px;
+  border-radius: 20px;
+  background: #4a4a4a;
+  cursor: pointer;
+  filter: alpha(opacity:70);
+  opacity: .6;
+}
+
+.wrapper .dot span:hover, .wrapper .dot span.cur {
+  background-color: #4a4a4a;
+  opacity: .9;
 }
 
 .slide {
