@@ -6,8 +6,9 @@
 -  Autoplay
 -  Slide effect mode
 -  Dot
+-  Example(gulp)
 
 ## TODO
 
 -  Modularity
--  Example
+-  Example(webpack)
