@@ -1,0 +1,25 @@
+{
+  "name": "ln-slider",
+  "version": "1.0.0",
+  "description": "LnSlider",
+  "main": "LnSlider.js",
+  "scripts": {
+    "gulp": "gulp",
+    "webpack": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "slider",
+    "loop",
+    "dot",
+    "slide",
+    "fade"
+  ],
+  "author": "Lanz",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-uglify": "^1.5.3",
+    "webpack": "^1.12.14"
+  }
+}
