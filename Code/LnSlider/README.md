@@ -7,7 +7,7 @@
 -  Slide effect mode
 -  Dot
 -  Example
--  Modularity
+-  Modularity([Vue component](https://github.com/hanaarena/lazyday/tree/dev/Code/LnSlider/vuejs-version))
 
 ## Usage
 
