@@ -7,6 +7,7 @@
 -  Slide effect mode
 -  Dot
 -  Example
+-  Modularity
 
 ## Usage
 
@@ -67,8 +68,3 @@ Slide dot hoverable
 **dotFloat**  **_[left | center | right]_**
 
 Slide dot float
-
-
-## TODO
-
--  Modularity
