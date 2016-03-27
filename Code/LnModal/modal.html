@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Modal demo</title>
+  <style type="text/css">
+    body {
+      width: 100%;
+      margin: 0;
+    }
+
+    .open-button {
+      display: block;
+      width: 100px;
+      height: 40px;
+      color: #ffffff;
+      margin: 50px auto 0;
+      border: none;
+      background-color: #2ebcff;
+      -webkit-transition: all .3s;
+      -moz-transition: all .3s;
+      -ms-transition: all .3s;
+      -o-transition: all .3s;
+      transition: all .3s;
+      cursor: pointer;
+    }
+
+    .open-button:hover {
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .open-button:focus {
+      outline-style: none;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      padding-top: 100px;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 2;
+    }
+
+    .modal-container {
+      position: relative;
+      width: 600px;
+      margin: auto;
+      padding: 0;
+      outline: 0;
+      background-color: #ffffff;
+      -webkit-animation: animatezoom .3s;
+      -o-animation: animatezoom .3s;
+      animation: animatezoom .3s;
+    }
+
+    .modal-header, .modal-content {
+      padding: 1px 15px;
+      border-bottom: 1px solid #4a4a4a;
+    }
+
+    .modal-header .close {
+      float: right;
+      font-size: 24px;
+      font-weight: bold;
+      color: inherit;
+      text-decoration: none;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .modal-footer {
+      padding: 1px 15px;
+    }
+
+    .modal-header-text {
+      float: left;
+    }
+
+    .clear {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    
+    @keyframes animatezoom {
+      from {
+        -webkit-transform: scale(0);
+        -moz-transform: scale(0);
+        -ms-transform: scale(0);
+        -o-transform: scale(0);
+        transform: scale(0);
+      }
+      to {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1);
+      }
+    }
+    
+    @-webkit-keyframes animatezoom {
+      from {
+        -webkit-transform: scale(0);
+        -moz-transform: scale(0);
+        -ms-transform: scale(0);
+        -o-transform: scale(0);
+        transform: scale(0);
+      }
+      to {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="open-button">Open modal</button>
+
+  <div class="modal">
+    <div class="modal-container">
+      <header class="modal-header">
+        <p class="modal-header-text">Modal header</p>
+        <span class="close">x</span>
+        <div class="clear"></div>
+      </header>
+      <div class="modal-content">
+        <p>Modal content</p>
+        <p>Modal content</p>
+      </div>
+      <footer class="modal-footer">
+        <p>Modal footer</p>
+      </footer>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var modalEle = document.getElementsByClassName('modal')[0];
+    var close = document.getElementsByClassName('close')[0];
+    var openButton = document.getElementsByClassName('open-button')[0];
+
+    if (modalEle.addEventListener) {
+      // Open modal
+      openButton.addEventListener('click', function () {
+        modalEle.style.display = 'block';
+      });
+
+      // Close modal
+      close.addEventListener('click', function () {
+        modalEle.style.display = 'none';
+      });
+    } else if (modalEle.attachEvent)  {
+      openButton.attachEvent('onclick', function () {
+        modalEle.style.display = 'block';
+      });
+
+      close.attachEvent('onclick', function () {
+        modalEle.style.display = 'none';
+      });
+    }
+
+    window.onclick = function (e) {
+      if (e.target == modalEle) {
+        modalEle.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>

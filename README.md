@@ -7,6 +7,7 @@ little lanz status
 -  [Learn nodejs socket.io](https://github.com/hanaarena/lazyday/tree/dev/Code/simple_webchat)
 -  [Learn Mongodb](https://github.com/hanaarena/lazyday/tree/dev/Code/payment-records)
 -  [LnSlider](https://github.com/hanaarena/lazyday/tree/dev/Code/LnSlider)
+-  [LnModal](https://github.com/hanaarena/lazyday/tree/dev/Code/LnModal)
 
 ## Link
 
