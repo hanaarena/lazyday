@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Tabs demo</title>
+    <style type="text/css">
+      .tab-nav {
+        color: #000000;
+        margin: 0;
+        padding: 0;
+        border: 1px solid #4a4a4a;
+        list-style-type: none;
+        overflow: hidden;
+      }
+
+      .tab-nav li {
+        float: left;
+      }
+
+      .tab-nav li a {
+        display: block;
+        color: #4a4a4a;
+        width: 50px;
+        padding: 5px;
+        text-decoration: none;
+      }
+
+      .tab-nav li a.active {
+        color: #ffffff;
+        background-color: #4a4a4a;
+      }
+
+      .tab-nav li a:hover {
+        color: #ffffff;
+        background-color: #a0a0a0;
+      }
+
+      .tab {
+        padding: 5px;
+        border: 1px solid #4a4a4a;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="tab-nav">
+      <li><a href="#" data-tab="tab1">Tab 1</a></li>
+      <li><a href="#" data-tab="tab2">Tab 2</a></li>
+      <li><a href="#" data-tab="tab3">Tab 3</a></li>
+    </ul>
+
+    <div id="tab1" class="tab">
+      <h3>Tab 1</h3>
+      <p>Content 1</p>
+    </div>
+    <div id="tab2" class="tab">
+      <h3>Tab 2</h3>
+      <p>Content 2</p>
+    </div>
+    <div id="tab3" class="tab">
+      <h3>Tab 3</h3>
+      <p>Content 3</p>
+    </div>
+
+    <script type="text/javascript">
+      var tabNav = document.getElementsByClassName('tab-nav')[0].children;
+      var tabs = document.getElementsByClassName('tab');
+
+      // Init first tab
+      changeTab('tab1');
+      tabNav[0].getElementsByTagName('a')[0].className = 'active';
+
+      for (var i = 0, len = tabs.length; i < len; i++) {
+        if (tabNav[i].addEventListener) {
+          tabNav[i].addEventListener('click', function (e) {
+            e.preventDefault();
+            changeTab(this.getElementsByTagName('a')[0].getAttribute('data-tab'));
+            this.getElementsByTagName('a')[0].className = 'active';
+          });
+        } else if (tabNav[i].attachEvent) {
+          tabNav[i].attachEvent('onclick', function (e) {
+            e.preventDefault();
+            changeTab(this.getElementsByTagName('a')[0].getAttribute('data-tab'));
+            this.getElementsByTagName('a')[0].className = 'active';
+          });
+        }
+      }
+
+      function changeTab(tab) {
+        tabs[0].style.display = 'none';
+        for (var i = 0, len = tabs.length; i < len; i++) {
+          tabs[i].style.display = 'none';
+          tabNav[i].getElementsByTagName('a')[0].className = '';
+        }
+        document.getElementById(tab).style.display = 'block';
+      }
+    </script>
+  </body>
+</html>
