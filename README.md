@@ -8,6 +8,7 @@ little lanz status
 -  [Learn Mongodb](https://github.com/hanaarena/lazyday/tree/dev/Code/payment-records)
 -  [LnSlider](https://github.com/hanaarena/lazyday/tree/dev/Code/LnSlider)
 -  [LnModal](https://github.com/hanaarena/lazyday/tree/dev/Code/LnModal)
+-  [LnTabs](https://github.com/hanaarena/lazyday/tree/dev/Code/LnTabs)
 
 ## Link
 
