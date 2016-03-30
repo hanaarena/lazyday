@@ -9,28 +9,26 @@
   <div class="container">
     <div class="wrapper">
       <ul id="slider">
-        <li><div style="background-color: #00AA88;"></div></li>
-        <li><div style="background-color: #ffae73;"></div></li>
-        <li><div style="background-color: #4b76aa;"></div></li>
-        <li><div style="background-color: #59aa59;"></div></li>
-        <li><div style="background-color: #c6806b;"></div></li>
-        <li><div style="background-color: #4d8baa;"></div></li>
+        <li><div style="background-color: #00AA88;">1</div></li>
+        <li><div style="background-color: #ffae73;">2</div></li>
+        <li><div style="background-color: #4b76aa;">3</div></li>
+        <li><div style="background-color: #59aa59;">4</div></li>
+        <li><div style="background-color: #c6806b;">5</div></li>
+        <li><div style="background-color: #4d8baa;">6</div></li>
       </ul>
       <span class="prev" id="prev"></span>
       <span class="next" id="next"></span>
     </div>
   </div>
   
-  <script type="text/javascript" src="../dist/LnSlider.js"></script>
+  <script type="text/javascript" src="../src/LnSlider.js"></script>
   <script type="text/javascript">
     var slide = new LnSlider('.wrapper', { 
       prev: '.prev',
       next: '.next',
       autoplay: true,
-      effect: 'fade',
-      dot: true,
-      dotHover: true,
-      dotFloat: 'center'
+      effect: 'slide',
+      dot: false
     });
   </script>
 </body>

@@ -7,7 +7,7 @@
     this.slider = this.container.children[0];
     this.items = this.slider.children;
     this.itemWidth = this.items[0].offsetWidth;
-    this.currentPostion = 0;
+    this.currentPosition = 0;
     this.effect = opt.effect == 'fade' ? 'fade' : 'slide';
 
     // Use for cancels repeated action which was set up using setInterval.
@@ -23,11 +23,21 @@
 
       opt.prev.addEventListener('click', function (e) {
         e.preventDefault();
-        that.prev();
+        // Handle fast nav control click: offset-right is between `-item-width`~0
+        if (parseInt(that.items[0].style.right) < 0 && parseInt(that.items[0].style.right) > -that.itemWidth) {
+          that.items[0].style.right = that.items[1].style.right = '0';
+        } else {
+          that.prev();
+        }
       });
       opt.next.addEventListener('click', function (e) {
         e.preventDefault();
-        that.next();
+        // Handle fast nav control click: offset-right is between 0~`item-width`
+        if (parseInt(that.items[2].style.right) > 0 && parseInt(that.items[2].style.right) < that.itemWidth) {
+          that.items[1].style.right = that.items[2].style.right = '0';
+        } else {
+          that.next();
+        }
       });
     } else if (opt.prev || opt.next) {
       throw 'Should both include prev & next Nav control elements!';
@@ -41,12 +51,17 @@
       this.addDots();
     }
 
-    if (opt.dotHover) {
-      var eles = document.querySelector('.dot').children;
+    if (opt.effect === 'slide') {
+      // Move the last item to first position to prevent when user click `prev` at begin
+      helper.moveToFirst(this.items);
+    }
 
-      for (var i = 0, len = eles.length; i < len; i++) {
+    if (opt.dotHover) {
+      var elems = document.querySelector('.dot').children;
+
+      for (var i = 0, len = elems.length; i < len; i++) {
         var that = this;
-        eles[i].addEventListener('mouseover', function (e) {
+        elems[i].addEventListener('mouseover', function (e) {
           e.preventDefault();
 
           if (that.options.autoplay) {
@@ -54,17 +69,17 @@
             that.autoplay();
           }
 
-          that.currentPostion = e.target.getAttribute('data-id') - 1;
+          that.currentPosition = e.target.getAttribute('data-id') - 1;
 
           if (that.effect == 'fade') {
             for (var n = 0, lens = that.items.length; n < lens; n++) {
-              if (n == that.currentPostion) { continue;}
-              that.fadeOut(n)
+              if (n == that.currentPosition) { continue;}
+              that.fadeOut(n);
             }
 
-            that.fadeIn(that.currentPostion);
+            that.fadeIn(that.currentPosition);
           } else {
-            that.slideTo(that.currentPostion, that.effect);
+            that.slideTo(that.currentPosition, that.effect);
           }
         });
       }
@@ -78,11 +93,23 @@
 
   var helper = {
     removeClass: function (className) {
-      var eles = document.querySelectorAll('.'+className);
-      [].forEach.call(eles, function (el) {
+      var elems = document.querySelectorAll('.'+className);
+      [].forEach.call(elems, function (elem) {
         // Link: http://stackoverflow.com/a/494046/1909011
-        el.className = el.className.replace(new RegExp(className), '');
+        elem.className = elem.className.replace(new RegExp(className), '');
       });
+    },
+    moveToFirst: function (elem) {
+      // Move the last item to the first & set the default offset-right for first item also remove the original
+      elem[0].insertAdjacentHTML('beforebegin', elem[elem.length - 1].outerHTML);
+      elem[elem.length - 1].remove();
+      elem[0].parentElement.style.right = parseInt(elem[0].offsetWidth) + 'px';
+    },
+    moveToLast: function (elem) {
+      // Move the first item to the last & reset the offset-right to 0 cause the slide effect animate is done
+      elem[elem.length - 1].insertAdjacentHTML('afterend', elem[0].outerHTML);
+      elem[0].remove();
+      elem[0].style.right = elem[elem.length - 1].style.right = 0;
     }
   }
 
@@ -92,12 +119,12 @@
       this.autoplay();
     }
 
-    if (this.currentPostion == 0) {
-      this.currentPostion = this.items.length - 1;
+    if (this.currentPosition == 0) {
+      this.currentPosition = this.items.length - 1;
       this.slideTo(this.items.length - 1, this.effect, true, true);
     } else {
-      this.currentPostion--;
-      this.slideTo(this.currentPostion, this.effect, true);
+      this.currentPosition--;
+      this.slideTo(this.currentPosition, this.effect, true);
     }
   };
 
@@ -107,60 +134,98 @@
       this.autoplay();
     }
 
-    if (this.currentPostion == this.items.length - 1) {
-      this.currentPostion = 0;
+    if (this.currentPosition == this.items.length - 1) {
+      this.currentPosition = 0;
       this.slideTo(0, this.effect, false, true);
     } else {
-      this.currentPostion++;
-      this.slideTo(this.currentPostion, this.effect);
+      this.currentPosition++;
+      this.slideTo(this.currentPosition, this.effect);
     }
   }
 
+  /**
+   * Slide to target position with spec effect
+   *
+   * @param {Number} pos - target position
+   * @param {String} effect
+   * @param {Boolean} [isPrev=false] - spec for prev operation
+   * @param {Boolean} [isLast=false] - when it's last position
+   */
   LnSlider.prototype.slideTo = function (pos, effect, isPrev, isLast) {
-    if (effect == 'fade') {
+    if (effect === 'fade') {
       // Condition for prev/next click when at last position
       var _pos = isLast ? this.items.length - 1 : (isPrev ? pos + 1 : pos -1);
 
       this.fadeOut(_pos);
       this.fadeIn(pos);
-    } else {
-      console.info('position: ' + this.currentPostion);
+    }else {
+      console.info('position: ' + this.currentPosition);
+      /** When complete slide to the target element, we should reset the animation,and
+       *  set the slider's spec item(index 1 & 2) offset-right to item's width.
+       *  finally,remove the first element to the last(don't forget remove the original)
+       *  so we can get the effect like `infinite loop`.
+       */
+      var that = this;
+      var stepLength = 5.2345;
+      var itemWidth = 0;
+      var sliding = null;
+      if (isPrev) {
+        sliding = setInterval(function () {
+          itemWidth -= stepLength;
+          /**
+           *  Previous control is index `0 and 1` slide from right to left
+           */
+          that.items[0].style.right = that.items[1].style.right = itemWidth + 'px';
 
-      var targetPos = this.getTargetPos(pos);
-      console.info('target position: ' + targetPos);
+          if (itemWidth < -that.itemWidth) {
+            that.items[0].style.right = that.items[1].style.right = 0;
+            clearInterval(sliding);
+            helper.moveToFirst(that.items);
+          }
+        }, 1);
+      } else {
+        sliding = setInterval(function () {
+          itemWidth += stepLength;
+          /**
+           *  Next control is index `0 and 1` slide from left to right
+           */
+          that.items[1].style.right = that.items[2].style.right  = itemWidth + 'px';
 
-      this.slider.style.right = targetPos + 'px';
+          if (itemWidth > that.itemWidth) {
+            that.items[1].style.right = that.itemWidth + 'px';
+            that.items[2].style.right = 0;
+            clearInterval(sliding);
+            helper.moveToLast(that.items);
+          }
+        }, 1);
+      }
     }
 
     if (this.options.dot) {
       helper.removeClass('cur');
-      var eles = document.querySelector('.dot').children;
-      eles[pos].className += 'cur';
+      var elems = document.querySelector('.dot').children;
+      elems[pos].className += 'cur';
     }
-  }
-
-  // Get target position to set the `right` value
-  LnSlider.prototype.getTargetPos = function (pos) {
-    var targetPos;
-    targetPos = this.itemWidth * pos;
-
-    return targetPos;
   }
 
   LnSlider.prototype.autoplay = function () {
     var that = this;
     this.nInterval = setInterval(function() {
-      that.currentPostion++;
-      if (that.currentPostion == that.items.length) {
-        that.currentPostion = 0;
+      that.currentPosition++;
+      if (that.currentPosition == that.items.length) {
+        that.currentPosition = 0;
         that.slideTo(0, that.effect, false, true);
       } else {
-        that.slideTo(that.currentPostion, that.effect);
+        that.slideTo(that.currentPosition, that.effect);
       }
     }, 1000);
   }
 
-  // Next element to fade in
+  /**
+   * Next position to fade in
+   *
+   * @param {Number} index - target position
+   */
   LnSlider.prototype.fadeIn = function (index) {
     var element = this.items[index];
     element.style.opacity = 0;
@@ -178,7 +243,11 @@
     tick();
   }
 
-  // Current element to fade out
+  /**
+   * Current position to fade out
+   *
+   * @param {Number} index - current position
+   */
   LnSlider.prototype.fadeOut = function (index) {
     var element = this.items[index];
     element.style.opacity = 1;
