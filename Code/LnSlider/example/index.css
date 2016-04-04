@@ -17,6 +17,7 @@
   width: 100%;
   text-align: center;
   bottom: 10px;
+  z-index: 3;
 }
 
 .wrapper .dot.float-left {
@@ -46,8 +47,16 @@
 }
 
 .slide {
-  position: relative;
+  position: absolute;
   float: left;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
 }
 
 .fade {
@@ -60,17 +69,14 @@
 }
 
 #slider {
-  position: relative;
   width: 1000%;
-  right: 0;
-  list-style: none;
-  overflow: hidden;
   margin: 0;
   padding: 0;
 }
 
 #slider li {
   width: 650px;
+  list-style-type: none;
 }
 
 #slider li div {
@@ -85,6 +91,7 @@
   height: 50px;
   width: 30px;
   opacity: 0.6;
+  z-index: 3;
 }
 
 .prev:hover, .next:hover {

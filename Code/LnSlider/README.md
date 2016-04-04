@@ -6,7 +6,6 @@
 -  Autoplay
 -  Slide effect mode
 -  Dot
--  Example
 -  Modularity([Vue component](https://github.com/hanaarena/lazyday/tree/dev/Code/LnSlider/vuejs-version))
 
 ## Usage
@@ -61,9 +60,9 @@ Slide effect
 
 Show slide dot
 
-**dotHover**  **_[Boolean]_**
+**dotClick**  **_[Boolean]_**
 
-Slide dot hoverable
+Slide dot clickable
 
 **dotFloat**  **_[left | center | right]_**
 
