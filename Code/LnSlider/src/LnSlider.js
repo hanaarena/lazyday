@@ -8,10 +8,16 @@
     this.items = this.slider.children;
     this.itemWidth = this.items[0].offsetWidth;
     this.currentPosition = 0;
+    this.previousPosition = 0;
     this.effect = opt.effect == 'fade' ? 'fade' : 'slide';
 
     // Use for cancels repeated action which was set up using setInterval.
     this.nInterval;
+
+    // Set slider effect for each slide
+    for (var i = 0, len = this.items.length; i < len; i++) {
+      this.items[i].className += opt.effect ? opt.effect : 'slide';
+    }
 
     if (opt.prev && opt.next) {
       var that = this;
@@ -24,8 +30,8 @@
       opt.prev.addEventListener('click', function (e) {
         e.preventDefault();
         // Handle fast nav control click: offset-right is between `-item-width`~0
-        if (parseInt(that.items[0].style.right) < 0 && parseInt(that.items[0].style.right) > -that.itemWidth) {
-          that.items[0].style.right = that.items[1].style.right = '0';
+        if (parseInt(that.items[that.previousPosition].style.right) < 0 && parseInt(that.items[that.previousPosition].style.right) > -that.itemWidth) {
+          return;
         } else {
           that.prev();
         }
@@ -33,14 +39,14 @@
       opt.next.addEventListener('click', function (e) {
         e.preventDefault();
         // Handle fast nav control click: offset-right is between 0~`item-width`
-        if (parseInt(that.items[2].style.right) > 0 && parseInt(that.items[2].style.right) < that.itemWidth) {
-          that.items[1].style.right = that.items[2].style.right = '0';
+        if (parseInt(that.items[that.currentPosition].style.right) < 0 && parseInt(that.items[that.previousPosition].style.right) > -that.itemWidth) {
+          return;        
         } else {
           that.next();
         }
       });
     } else if (opt.prev || opt.next) {
-      throw 'Should both include prev & next Nav control elements!';
+      throw new Error('Should both include prev & next Nav control elements!');
     }
 
     if (opt.autoplay) {
@@ -51,25 +57,39 @@
       this.addDots();
     }
 
-    if (opt.effect === 'slide') {
+    if (opt.effect === 'slide' && !opt.dot) {
       // Move the last item to first position to prevent when user click `prev` at begin
       helper.moveToFirst(this.items);
     }
 
-    if (opt.dotHover) {
+    if (opt.dot && opt.dotClick) {
       var elems = document.querySelector('.dot').children;
 
       for (var i = 0, len = elems.length; i < len; i++) {
+        this.previousPosition = this.currentPosition;
+
+        if (opt.effect !== 'fade') this.items[i].style.right = '-' + this.itemWidth + 'px';
+
         var that = this;
-        elems[i].addEventListener('mouseover', function (e) {
+
+        elems[i].addEventListener('click', function (e) {
           e.preventDefault();
+
+          // Handle fast nav control click: offset-right is between 0~`item-width`
+          if (parseInt(that.items[that.previousPosition].style.right) < 0  || parseInt(that.items[that.currentPosition].style.right) < 0 && parseInt(that.items[that.previousPosition].style.right) > -that.itemWidth) {
+            return;
+          }
+
+          if (that.currentPosition === e.target.getAttribute('data-id') - 1) {
+            return;
+          } else {
+            that.currentPosition = e.target.getAttribute('data-id') - 1;
+          }
 
           if (that.options.autoplay) {
             clearInterval(that.nInterval);
             that.autoplay();
           }
-
-          that.currentPosition = e.target.getAttribute('data-id') - 1;
 
           if (that.effect == 'fade') {
             for (var n = 0, lens = that.items.length; n < lens; n++) {
@@ -83,11 +103,10 @@
           }
         });
       }
-    }
 
-    // Set slider effect for each slide
-    for (var i = 0, len = this.items.length; i < len; i++) {
-      this.items[i].className += opt.effect ? opt.effect : 'slide';
+      if (opt.effect === 'slide') {
+        this.items[0].style.right = 0;
+      }
     }
   }
 
@@ -158,47 +177,62 @@
 
       this.fadeOut(_pos);
       this.fadeIn(pos);
-    }else {
-      console.info('position: ' + this.currentPosition);
-      /** When complete slide to the target element, we should reset the animation,and
-       *  set the slider's spec item(index 1 & 2) offset-right to item's width.
-       *  finally,remove the first element to the last(don't forget remove the original)
+    } else {
+      /** 
+       *  When complete slide to the target element, we should reset the animation(
+       *  mean setInterval here),and reset the target & previous position style.
        *  so we can get the effect like `infinite loop`.
        */
-      var that = this;
-      var stepLength = 5.2345;
-      var itemWidth = 0;
-      var sliding = null;
-      if (isPrev) {
-        sliding = setInterval(function () {
-          itemWidth -= stepLength;
-          /**
-           *  Previous control is index `0 and 1` slide from right to left
-           */
-          that.items[0].style.right = that.items[1].style.right = itemWidth + 'px';
-
-          if (itemWidth < -that.itemWidth) {
-            that.items[0].style.right = that.items[1].style.right = 0;
-            clearInterval(sliding);
-            helper.moveToFirst(that.items);
-          }
-        }, 1);
-      } else {
-        sliding = setInterval(function () {
-          itemWidth += stepLength;
-          /**
-           *  Next control is index `0 and 1` slide from left to right
-           */
-          that.items[1].style.right = that.items[2].style.right  = itemWidth + 'px';
-
-          if (itemWidth > that.itemWidth) {
-            that.items[1].style.right = that.itemWidth + 'px';
-            that.items[2].style.right = 0;
-            clearInterval(sliding);
-            helper.moveToLast(that.items);
-          }
-        }, 1);
+      for (var i = 0, len = this.items.length; i < len; i++) {
+        this.items[i].className = this.options.effect ? this.options.effect : 'slide';
       }
+
+      // Detect whether slide to right or left: `1` is for `right`(true), `0` is for `left`(false)
+      var direction = this.currentPosition > this.previousPosition ? 1 : 0;
+
+      /**
+       * When slide from first to last(prev) or from last to first(next), shold change the slide stack z-index or it will be covered,
+       * and when the animation end, it will reset to default
+       */
+      if (isPrev && isLast) {
+        direction = 0;
+        this.items[0].style.zIndex = 3;
+        this.items[this.items.length - 1].style.right = 0;
+      } else if (isLast) {
+        direction = 1;
+        this.items[this.currentPosition].style.zIndex = 3;
+      };
+
+      var that = this;
+      var stepLength = direction ? 5.2345 : -5.2345;
+      var itemWidth = direction ? -this.itemWidth : 0;
+      var sliding = null;
+      // Handle prev control nav: let the previous slide `display` at first so will have an effect like slide to right
+      direction ? '' : this.items[this.currentPosition].style.right = 0
+
+      sliding = setInterval(function () {
+        itemWidth += stepLength;
+        that.items[direction ? that.currentPosition : that.previousPosition].style.right = itemWidth + 'px';
+
+        if (itemWidth > 0) {
+          that.items[that.previousPosition].style.right = -that.itemWidth + 'px';
+          that.items[that.currentPosition].style.right = 0;
+          that.previousPosition = that.currentPosition;
+
+          // Reset the items[0] z-index,or it will at stack's top 
+          if (isLast) that.items[that.currentPosition].style.zIndex = '';
+
+          clearInterval(sliding);
+        } else if (itemWidth < -that.itemWidth) {
+          that.items[that.previousPosition].style.right = -that.itemWidth + 'px';
+          that.previousPosition = that.currentPosition;
+
+          // Reset the items[0] z-index,or it will at stack's top 
+          if (isPrev && isLast) that.items[0].style.zIndex = '';
+
+          clearInterval(sliding);
+        }
+      }, 1);
     }
 
     if (this.options.dot) {
