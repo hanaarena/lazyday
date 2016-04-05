@@ -4,32 +4,17 @@ This a slider component build with Vue.js
 
 ## Usage
 
-Import component into your main app entry
+Just try import component in your component file like below:
 
-````
+````javascript
 import slider from './slider'
 import slide from './slide'
 ````
 
-Also don't forget to define in `components`:
+see more in `vue-version` folder.
 
-````
-export default {
-  ...
-  components: {
-    'slider': slider,
-    'slide': slide
-  },
-  ...
-}
-````
+Or you just can use an awesome start-kit tool (tooling)[https://github.com/egoist/tooling/] to start the demo. if you use that,you can run:
 
-Last step,use in `template`:
+> tooling watch -u vue -e index -p 3001
 
-````
-<slider :control="true" :dot="true" :auto="true" dot-float="center">
-  <slide v-for="item in items">
-  <li><div>{{$index}}</div></li>
-  </slide>
-</slider>
-````
+and you will see the demo~
