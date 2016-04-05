@@ -240,50 +240,50 @@
     }
   }
 </script>
-<style lang="less">
+<style>
   .wrapper {
     position: relative;
     width: 650px;
     height: 450px;
     margin: 0 auto;
     overflow: hidden;
+  }
 
-    .dot {
-      position: absolute;
-      width: 100%;
-      text-align: center;
-      bottom: 10px;
+  .wrapper .dot {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 10px;
+  }
 
-      &.float-left {
-        text-align: left;
-      }
+  .wrapper .dot.float-left {
+    text-align: left;
+  }
 
-      &.float-right {
-        text-align: right;
-      }
+  .wrapper .dot.float-right {
+    text-align: right;
+  }
 
-      span {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        overflow: hidden;
-        margin-right: 10px;
-        border-radius: 20px;
-        background: #4a4a4a;
-        cursor: pointer;
-        opacity: .6;
+  .wrapper .dot span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    overflow: hidden;
+    margin-right: 10px;
+    border-radius: 20px;
+    background: #4a4a4a;
+    cursor: pointer;
+    opacity: .6;
+  }
 
-        &:hover {
-          background-color: #4a4a4a;
-          opacity: .9;
-        }
+  .wrapper .dot span:hover {
+    background-color: #4a4a4a;
+    opacity: .9;
+  }
 
-        &.cur {
-          background-color: #4a4a4a;
-          opacity: .9;
-        }
-      }
-    }
+  .wrapper .dot span.cur {
+    background-color: #4a4a4a;
+    opacity: .9;
   }
 
   .slide {
@@ -294,10 +294,10 @@
   .fade {
     position: fixed;
     opacity: 0;
+  }
 
-    &:first-child {
-      opacity: 1;
-    }
+  .fade:first-child {
+    opacity: 1;
   }
 
   #slider {
@@ -309,37 +309,39 @@
     margin: 0;
     padding: 0;
     transition: all .6s ease;
-
-    li {
-      width: 650px;
-
-      div {
-        width: 650px;
-        height: 400px;
-        border: 1px solid #4a4a4a;
-      }
-    }
   }
 
-  .prev, .next {
+  #slider li {
+    width: 650px;
+  }
+
+  #slider li div {
+    width: 650px;
+    height: 400px;
+    border: 1px solid #4a4a4a;
+  }
+
+  .prev,
+  .next {
     position: absolute;
     top: 120px;
     height: 50px;
     width: 30px;
     opacity: 0.6;
+  }
 
-    &:hover {
-      opacity: .9;
-    }
+  .prev:hover,
+  .next:hover {
+    opacity: .9;
   }
 
   #prev {
-    background: #000 no-repeat center;
+    background: #000000 no-repeat center;
     left: 0;
   }
-
+  
   #next {
-    background: #000 no-repeat center;
+    background: #000000 no-repeat center;
     right: 0;
   }
 </style>
