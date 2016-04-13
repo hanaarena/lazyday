@@ -1,38 +1,35 @@
 {
-  "name": "rabbitrabbitrabbit",
-  "version": "1.0.0",
-  "description": "Real time web-based forum",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:matthewbdaly/rabbitrabbitrabbit.git"
+  "name": "payment-records",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "c": "babel -d app/ src",
+    "start": "npm run c && ./node_modules/.bin/nodemon app/bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "socket.io": "latest",
-    "socket.io-client": "latest",
-    "express": "latest",
-    "jade": "latest",
-    "mongoose": "latest"
+    "busboy": "^0.2.13",
+    "co": "^4.6.0",
+    "debug": "^2.2.0",
+    "jade": "~1.11.0",
+    "koa": "^1.1.2",
+    "koa-bodyparser": "^2.0.1",
+    "koa-connect": "^1.0.0",
+    "koa-json": "^1.1.1",
+    "koa-logger": "^1.3.0",
+    "koa-onerror": "^1.2.1",
+    "koa-router": "^5.3.0",
+    "koa-static": "^1.5.2",
+    "koa-views": "^3.1.0",
+    "leanengine": "^0.4.0",
+    "multiparty": "^4.1.2"
   },
   "devDependencies": {
-    "chai": "latest",
-    "grunt": "~0.4.4",
-    "grunt-coveralls": "^1.0.0",
-    "grunt-jslint": "~1.1.8",
-    "grunt-mocha-istanbul": "2.2.0",
-    "istanbul": "^0.3.0",
-    "mocha": "latest",
-    "request": "latest",
-    "sinon": "1.12.1",
-    "sinon-mocha": "0.0.3"
-  },
-  "engines": {
-    "node": "0.10.x",
-    "npm": "1.2.x"
-  },
-  "scripts": {
-    "test": "grunt test"
-  },
-  "author": "Matthew Daly",
-  "license": "GPLv2"
+    "babel-core": "^6.7.5",
+    "babel-loader": "^6.2.4",
+    "babel-polyfill": "^6.7.4",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "nodemon": "^1.8.1"
+  }
 }
