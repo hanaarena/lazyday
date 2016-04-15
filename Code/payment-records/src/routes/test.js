@@ -3,6 +3,12 @@ const AV = require('leanengine');
 const fs = require('fs')
 const multiparty = require('multiparty')
 
+// DB
+const mongorito = require('mongorito')
+const run = require('../models/run')
+const User = require('../models/User')
+
+// leanengine config
 const APP_ID = 'PG2Eoc7wp4F7fzCr8z2RERMW-gzGzoHsz';
 const APP_KEY = 'UdRYVXxsPgPRpppRPaGJJ8oV';
 const MASTER_KEY = 'cOFpQzcQ3LDWmYPAcup8kIP6';
@@ -49,6 +55,7 @@ router.post('/upload', function* (next) {
 	});
 });
 
+// Upload image or large file
 router.post('/upload/image', function* (next) {
 	const form = new multiparty.Form();
   form.parse(this.req, function(err, fields, files) {
@@ -101,6 +108,81 @@ router.get('/image/list', function* (next) {
 	console.log(this.body)
 
 	// this.redirect('/test')
+})
+
+// Create User & store in mongodb
+router.post('/create/user', function* (next) {
+	run(function* () {
+	  let user = new User({
+	    name: 'ffff'
+	  })
+
+	  yield user.save()
+
+	  console.log('User:', user.get('_id'))
+
+	  user.set('name', 'New name');
+	  yield user.save();
+
+	  console.log('Update User:', user.get('_id'))
+	})
+
+	this.body = this.request.body
+
+	console.log(this.body)
+
+  yield next
+});
+
+// Get users data
+router.get('/api/users', function* (next) {
+	let userList = []
+	let result = []
+
+	run(function* () {
+	  userList = yield User.all()
+
+	  userList.forEach((user, index) => {
+	  	result.push({
+	  		id: user.get('_id').toString()
+	  	})
+	  })
+
+  	console.log('Users:', result)
+	})
+
+	// http://stackoverflow.com/questions/22059775/using-callbacks-with-nodejs-in-koa/22062524#22062524
+	function load (callback) {
+  	setTimeout(function() {
+      callback(null, result);
+    }, 100);
+	}
+	
+	this.body = yield load
+	console.log('result: ', result)
+
+  yield next
+});
+
+// Get spec user data
+router.get('/api/user/:id', function* (next) {
+	this.body = this.params
+
+	yield next
+})
+
+// Get spec user data (more params)
+router.get('/api/user/:id/:date', function* (next) {
+	this.body = this.params
+
+	yield next
+})
+
+// Get query parameters => foo=bar&bar=foo
+router.get('/api/user', function* (next) {
+	this.body = this.request.query
+
+	yield next
 })
 
 module.exports = router;

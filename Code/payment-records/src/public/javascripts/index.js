@@ -1,6 +1,7 @@
 // const formDom = document.getElementsByClassName('fileForm')[0]
 // const fileDom = document.getElementsByClassName('fileInput')[0]
 // const submitBtn = document.getElementsByClassName('subBtn')[0]
+const createBtn = document.getElementsByClassName('createBtn')[0]
 
 // submitBtn.addEventListener('click', (e) => {
 // 	e.preventDefault();
@@ -26,3 +27,17 @@
 // 		alert('choose file')
 // 	}
 // })
+
+createBtn.addEventListener('click', (e) => {
+	e.preventDefault()
+
+	$.ajax({
+	  url: '/test/create/user',
+	  method: 'post',
+	  data: {
+	  	name: 'aaa'
+	  }
+	}).then(data => {
+	  console.log(data);
+	});
+})
