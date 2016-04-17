@@ -1,0 +1,23 @@
+extends layout
+
+block content
+	p= list
+	p #{list}
+
+	.container
+		form(id="fileForm", class="fileForm", method="POST", enctype="multipart/form-data", action="/test/upload/image")
+			input.fileInput(type="file", name="imageFile")
+			//input.subBtn(type="button", value="upload file")
+			input.subBtn(type="submit", value="upload file")
+		form(id="signupForm", action="/test/signup", method="POST")
+			input(type="text", name="username", value="")
+			input(type="password", name="pass", value="")
+			input(type="submit", value="Sign up")
+
+		form(id="createForm2", action="/test/create/user", method="POST")
+			input(type="text", name="name", value="")
+			input(type="password", name="pass", value="")
+			input.createBtn(type="button", value="Create")
+			//input(type="submit", value="Create")
+
+	script(src="/javascripts/index.js")
