@@ -28,16 +28,16 @@ const createBtn = document.getElementsByClassName('createBtn')[0]
 // 	}
 // })
 
-createBtn.addEventListener('click', (e) => {
-	e.preventDefault()
+createBtn.addEventListener('click', e => {
+  e.preventDefault()
 
-	$.ajax({
-	  url: '/test/create/user',
-	  method: 'post',
-	  data: {
-	  	name: 'aaa'
-	  }
-	}).then(data => {
-	  console.log(data);
-	});
+  $.ajax({
+    url: '/test/create/user',
+    method: 'post',
+    data: {
+      name: 'aaa'
+    }
+  }).then(data => {
+    console.log(data)
+  })
 })
