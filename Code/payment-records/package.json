@@ -6,7 +6,7 @@
     "babel": "babel public/javascripts/src --out-dir public/javascripts/dist",
     "start": "npm run babel && ./node_modules/.bin/nodemon bin/www",
     "lint": "eslint public/javascripts/src/** test/**",
-    "build": "npm run lint && babel public/javascripts/src --out-dir public/javascripts/dist --source-maps true --no-comments",
+    "build": "npm run lint && babel public/javascripts/src --out-dir public/javascripts/dist --source-maps inline --no-comments",
     "test": "./node_modules/.bin/mocha --timeout 15000 --compilers js:babel-register --reporter spec --require should ./test/*.js"
   },
   "dependencies": {
